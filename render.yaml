@@ -8,26 +8,21 @@ services:
     envVars:
       - key: PORT
         value: 5005
-      - key: ACTION_SERVER_URL
-        fromService:
-          name: rasa-actions
-          type: web
-          property: host
       - key: API_URL
-        sync: false  # Set this in Render dashboard to your backend API URL (e.g., https://your-api.com)
+        sync: false
     healthCheckPath: /webhooks/rest/webhook
-    plan: starter  # Can upgrade to professional for better performance
+    plan: starter
 
   # Rasa Action Server
   - type: web
     name: rasa-actions
     env: python
-    buildCommand: pip install -r requirements.txt && rasa train
+    buildCommand: pip install -r requirements.txt
     startCommand: rasa run actions --port $PORT
     envVars:
       - key: PORT
         value: 5055
       - key: API_URL
-        sync: false  # Set this in Render dashboard to your backend API URL
+        sync: false
     plan: starter
 
