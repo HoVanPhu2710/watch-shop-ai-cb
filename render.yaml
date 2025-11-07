@@ -3,28 +3,26 @@ services:
   - type: web
     name: rasa-server
     env: python
-    buildCommand: pip install -r requirements.txt && rasa train
+    pythonVersion: "3.10.12"
+    buildCommand: pip install --upgrade pip && pip install "setuptools<70" wheel && pip install -r requirements.txt && rasa train
     startCommand: rasa run --enable-api --cors "*" --port $PORT
     envVars:
       - key: PORT
         value: 5005
       - key: API_URL
         sync: false
-      - key: PYTHON_VERSION
-        value: "3.10.12"
     healthCheckPath: /webhooks/rest/webhook
 
   # Rasa Action Server
   - type: web
     name: rasa-actions
     env: python
-    buildCommand: pip install -r requirements.txt
+    pythonVersion: "3.10.12"
+    buildCommand: pip install --upgrade pip && pip install "setuptools<70" wheel && pip install -r requirements.txt
     startCommand: rasa run actions --port $PORT
     envVars:
       - key: PORT
         value: 5055
       - key: API_URL
         sync: false
-      - key: PYTHON_VERSION
-        value: "3.10.12"
 
