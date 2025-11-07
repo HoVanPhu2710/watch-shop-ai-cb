@@ -7,9 +7,13 @@
 from typing import Any, Text, Dict, List
 import requests
 import json
+import os
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
+
+# Get API URL from environment variable, default to localhost for local development
+API_BASE_URL = os.getenv("API_URL", "http://localhost:8080")
 
 
 class ActionShowBrands(Action):
@@ -44,7 +48,7 @@ class ActionShowBrands(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/brands", 
+            response = requests.get(f"{API_BASE_URL}/v1/brands", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
@@ -127,7 +131,7 @@ class ActionShowCategories(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/categorys", 
+            response = requests.get(f"{API_BASE_URL}/v1/categorys", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
@@ -213,7 +217,7 @@ class ActionShowColors(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/colors", 
+            response = requests.get(f"{API_BASE_URL}/v1/colors", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
@@ -287,11 +291,11 @@ class ActionShowPopularWatches(Action):
             # Choose API endpoint based on token availability
             if token:
                 # Use authenticated recommendations API
-                response = requests.get("http://localhost:8080/v1/recommendations?limit=5", 
+                response = requests.get(f"{API_BASE_URL}/v1/recommendations?limit=5", 
                                      headers=headers, timeout=10)
             else:
                 # Use public recommendations API
-                response = requests.get("http://localhost:8080/v1/recommendations/public?limit=5", 
+                response = requests.get(f"{API_BASE_URL}/v1/recommendations/public?limit=5", 
                                      headers=headers, timeout=10)
             
             response.raise_for_status()
@@ -420,7 +424,7 @@ class ActionShowMovementTypes(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/movement-type", 
+            response = requests.get(f"{API_BASE_URL}/v1/movement-type", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
@@ -591,7 +595,7 @@ class ActionShowStrapMaterials(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/strap-materials", 
+            response = requests.get(f"{API_BASE_URL}/v1/strap-materials", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
@@ -896,19 +900,19 @@ class ActionSearchProducts(Action):
             strap_material = {}
 
             try:
-                brands_list = fetch_items("http://localhost:8080/v1/brands", ["brands", "items"])
+                brands_list = fetch_items(f"{API_BASE_URL}/v1/brands", ["brands", "items"])
                 brand = find_first_match(brands_list)
             except Exception:
                 pass
 
             try:
-                categories_list = fetch_items("http://localhost:8080/v1/categorys", ["categorys", "items"])
+                categories_list = fetch_items(f"{API_BASE_URL}/v1/categorys", ["categorys", "items"])
                 category = find_first_match(categories_list)
             except Exception:
                 pass
 
             try:
-                colors_list = fetch_items("http://localhost:8080/v1/colors", ["colors", "items"])
+                colors_list = fetch_items(f"{API_BASE_URL}/v1/colors", ["colors", "items"])
                 color = find_first_match(colors_list, synonyms=color_synonyms)
                 if not color:
                     # heuristic for gold if API color name differs
@@ -922,7 +926,7 @@ class ActionSearchProducts(Action):
                 pass
 
             try:
-                movement_types_list = fetch_items("http://localhost:8080/v1/movement-type", ["movementTypes", "items"])
+                movement_types_list = fetch_items(f"{API_BASE_URL}/v1/movement-type", ["movementTypes", "items"])
                 movement_type = find_first_match(movement_types_list)
                 # quartz/automatic synonyms
                 if not movement_type:
@@ -936,7 +940,7 @@ class ActionSearchProducts(Action):
                 pass
 
             try:
-                strap_materials_list = fetch_items("http://localhost:8080/v1/strap-materials", ["strapMaterials", "rows"])
+                strap_materials_list = fetch_items(f"{API_BASE_URL}/v1/strap-materials", ["strapMaterials", "rows"])
                 # Avoid matching generic word "đồng" from "đồng hồ"; require explicit strap context
                 for it in strap_materials_list:
                     n = (it.get("name") or "").lower()
@@ -981,7 +985,7 @@ class ActionSearchProducts(Action):
                         rec_headers = {"Content-Type": "application/json"}
                         rec_headers["Authorization"] = f"Bearer {token}"
                         rec_resp = requests.get(
-                            "http://localhost:8080/v1/recommendations",
+                            f"{API_BASE_URL}/v1/recommendations",
                             headers=rec_headers,
                             params={"limit": 12},
                             timeout=10,
@@ -989,7 +993,7 @@ class ActionSearchProducts(Action):
                     else:
                         rec_headers = {"Content-Type": "application/json"}
                         rec_resp = requests.get(
-                            "http://localhost:8080/v1/recommendations/public",
+                            f"{API_BASE_URL}/v1/recommendations/public",
                             headers=rec_headers,
                             params={"limit": 12},
                             timeout=10,
@@ -1064,7 +1068,7 @@ class ActionSearchProducts(Action):
                 # Do not send q when we already have structured filters
 
                 response = requests.get(
-                    "http://localhost:8080/v1/search",
+                    f"{API_BASE_URL}/v1/search",
                     headers=headers,
                     params=query_params,
                     timeout=10,
@@ -1081,14 +1085,14 @@ class ActionSearchProducts(Action):
                         if token:
                             rec_headers["Authorization"] = f"Bearer {token}"
                             rec_resp = requests.get(
-                                "http://localhost:8080/v1/recommendations",
+                                f"{API_BASE_URL}/v1/recommendations",
                                 headers=rec_headers,
                                 params={"limit": 5},
                                 timeout=10,
                             )
                         else:
                             rec_resp = requests.get(
-                                "http://localhost:8080/v1/recommendations/public",
+                                f"{API_BASE_URL}/v1/recommendations/public",
                                 headers=rec_headers,
                                 params={"limit": 5},
                                 timeout=10,
@@ -1194,7 +1198,7 @@ class ActionSearchProducts(Action):
             else:
                 # Fallback: pure q search like original
                 search_query = "đồng hồ" if "đồng hồ" in user_text else (user_text.strip() or "đồng hồ")
-                response = requests.get(f"http://localhost:8080/v1/search?page=1&limit=12&q={search_query}", headers=headers, timeout=10)
+                response = requests.get(f"{API_BASE_URL}/v1/search?page=1&limit=12&q={search_query}", headers=headers, timeout=10)
                 response.raise_for_status()
                 data = response.json()
                 watches = data.get("watches", {}).get("items", [])
@@ -1342,7 +1346,7 @@ class ActionFilterProducts(Action):
 
             # Call search API with filter parameters
             response = requests.get(
-                "http://localhost:8080/v1/search",
+                f"{API_BASE_URL}/v1/search",
                 headers=headers,
                 params=query_params,
                 timeout=10,
@@ -1360,14 +1364,14 @@ class ActionFilterProducts(Action):
                     if token:
                         rec_headers["Authorization"] = f"Bearer {token}"
                         rec_resp = requests.get(
-                            "http://localhost:8080/v1/recommendations",
+                            f"{API_BASE_URL}/v1/recommendations",
                             headers=rec_headers,
                             params={"limit": 5},
                             timeout=10,
                         )
                     else:
                         rec_resp = requests.get(
-                            "http://localhost:8080/v1/recommendations/public",
+                            f"{API_BASE_URL}/v1/recommendations/public",
                             headers=rec_headers,
                             params={"limit": 5},
                             timeout=10,
@@ -1452,7 +1456,7 @@ class ActionFilterProducts(Action):
                         color_headers = {"Content-Type": "application/json"}
                         if token:
                             color_headers["Authorization"] = f"Bearer {token}"
-                        colors_resp = requests.get("http://localhost:8080/v1/colors", headers=color_headers, timeout=10)
+                        colors_resp = requests.get(f"{API_BASE_URL}/v1/colors", headers=color_headers, timeout=10)
                         colors_resp.raise_for_status()
                         colors_data = colors_resp.json()
                         colors_items = colors_data.get("colors", {}).get("items", [])
@@ -1475,7 +1479,7 @@ class ActionFilterProducts(Action):
                         sm_headers = {"Content-Type": "application/json"}
                         if token:
                             sm_headers["Authorization"] = f"Bearer {token}"
-                        sm_resp = requests.get("http://localhost:8080/v1/strap-materials", headers=sm_headers, timeout=10)
+                        sm_resp = requests.get(f"{API_BASE_URL}/v1/strap-materials", headers=sm_headers, timeout=10)
                         sm_resp.raise_for_status()
                         sm_data = sm_resp.json()
                         sm_items = sm_data.get("strapMaterials", {}).get("rows", [])
@@ -1613,12 +1617,12 @@ class ActionShowOrderStatus(Action):
             }
             
             # Fetch orders (limit 5)
-            orders_response = requests.get("http://localhost:8080/v1/orders?limit=5", 
+            orders_response = requests.get(f"{API_BASE_URL}/v1/orders?limit=5", 
                                          headers=headers, timeout=10)
             orders_response.raise_for_status()
             
             # Fetch order statuses
-            status_response = requests.get("http://localhost:8080/v1/order-status", 
+            status_response = requests.get(f"{API_BASE_URL}/v1/order-status", 
                                          headers=headers, timeout=10)
             status_response.raise_for_status()
             
@@ -1738,7 +1742,7 @@ class ActionShowOrderStatuses(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/order-status", 
+            response = requests.get(f"{API_BASE_URL}/v1/order-status", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
@@ -1816,7 +1820,7 @@ class ActionShowPromotions(Action):
                 "Content-Type": "application/json"
             }
             
-            response = requests.get("http://localhost:8080/v1/discounts", 
+            response = requests.get(f"{API_BASE_URL}/v1/discounts", 
                                  headers=headers, timeout=10)
             response.raise_for_status()
             
