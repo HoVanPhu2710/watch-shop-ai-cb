@@ -3,6 +3,7 @@ services:
   - type: web
     name: rasa-server
     env: python
+    pythonVersion: "3.10.12"
     buildCommand: pip install -r requirements.txt && rasa train
     startCommand: rasa run --enable-api --cors "*" --port $PORT
     envVars:
@@ -16,6 +17,7 @@ services:
   - type: web
     name: rasa-actions
     env: python
+    pythonVersion: "3.10.12"
     buildCommand: pip install -r requirements.txt
     startCommand: rasa run actions --port $PORT
     envVars:
