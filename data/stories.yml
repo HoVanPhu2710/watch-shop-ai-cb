@@ -1,0 +1,488 @@
+version: "3.1"
+
+stories:
+  # Basic greeting and interaction
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_products
+      - action: utter_show_products
+
+  - story: greet and ask about products
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_brand
+      - action: action_show_brands
+      - intent: ask_price
+      - action: action_show_price
+
+  - story: customer asks about specific product
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_price
+      - action: action_show_price
+      - intent: buy_product
+      - action: utter_buy_options
+
+  # Product search and browsing
+  - story: search products by category
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_category
+      - action: action_show_categories
+      - intent: ask_color
+      - action: action_show_colors
+
+  - story: search products by brand
+    steps:
+      - intent: ask_brand
+      - action: action_show_brands
+      - intent: ask_price
+      - action: action_show_price
+      - intent: ask_promotion
+      - action: action_show_promotions
+
+  - story: customer compares products
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_material
+      - action: action_show_strap_materials
+      - intent: ask_machine_type
+      - action: action_show_movement_types
+
+  # Price and promotion inquiries
+  - story: ask about price and promotions
+    steps:
+      - intent: ask_price
+      - action: action_show_price
+      - intent: ask_promotion
+      - action: action_show_promotions
+      - intent: ask_inventory
+      - action: utter_show_inventory
+
+  - story: customer interested in promotions
+    steps:
+      - intent: ask_promotion
+      - action: action_show_promotions
+      - intent: ask_brand
+      - action: action_show_brands
+      - intent: buy_product
+      - action: utter_buy_options
+
+  # Product details and specifications
+  - story: detailed product inquiry
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_material
+      - action: action_show_strap_materials
+      - intent: ask_color
+      - action: action_show_colors
+      - intent: ask_machine_type
+      - action: action_show_movement_types
+
+  - story: customer asks about materials and colors
+    steps:
+      - intent: ask_material
+      - action: action_show_strap_materials
+      - intent: ask_color
+      - action: action_show_colors
+      - intent: ask_category
+      - action: action_show_categories
+
+  # Warranty and return policies
+  - story: ask about warranty
+    steps:
+      - intent: ask_warranty
+      - action: utter_show_warranty_info
+      - intent: ask_exchange_return
+      - action: utter_show_exchange_return_policy
+
+  - story: customer concerned about warranty
+    steps:
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_warranty
+      - action: utter_show_warranty_info
+      - intent: ask_exchange_return
+      - action: utter_show_exchange_return_policy
+      - intent: buy_product
+      - action: utter_buy_options
+
+  # Order management
+  - story: check order status
+    steps:
+      - intent: ask_order_status
+      - action: utter_show_order_status
+      - intent: ask_inventory
+      - action: utter_show_inventory
+
+  - story: customer wants to cancel order
+    steps:
+      - intent: ask_order_status
+      - action: utter_show_order_status
+      - intent: cancel_order
+      - action: utter_confirm_cancellation
+
+  # Complete purchase flow
+  - story: complete purchase journey
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_price
+      - action: action_show_price
+      - intent: ask_promotion
+      - action: action_show_promotions
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_brand
+      - action: action_show_brands
+
+  - story: customer with specific requirements
+    steps:
+      - intent: ask_brand
+      - action: action_show_brands
+      - intent: ask_category
+      - action: action_show_categories
+      - intent: ask_color
+      - action: action_show_colors
+      - intent: ask_material
+      - action: action_show_strap_materials
+      - intent: ask_price
+      - action: action_show_price
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_popular_watches
+      - action: action_show_popular_watches
+
+  # Natural conversation flow
+  - story: casual browsing
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_category
+      - action: action_show_categories
+      - intent: ask_color
+      - action: action_show_colors
+      - intent: ask_price
+      - action: action_show_price
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: customer changes mind
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_price
+      - action: action_show_price
+      - intent: deny
+      - action: utter_ask_other_products
+      - intent: search_products
+      - action: utter_show_products
+
+  - story: customer needs more information
+    steps:
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_material
+      - action: action_show_strap_materials
+      - intent: ask_machine_type
+      - action: action_show_movement_types
+      - intent: ask_warranty
+      - action: utter_show_warranty_info
+      - intent: buy_product
+      - action: utter_buy_options
+
+  # Bot challenge handling
+  - story: bot challenge
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+      - intent: search_products
+      - action: utter_show_products
+
+  # Goodbye scenarios
+  - story: polite goodbye
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: customer satisfied and leaves
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: goodbye
+      - action: utter_goodbye
+
+  # Delivery and shipping inquiries
+  - story: ask about delivery
+    steps:
+      - intent: ask_delivery_time
+      - action: utter_show_delivery_time
+      - intent: ask_delivery_fee
+      - action: utter_show_delivery_fee
+      - intent: ask_delivery_area
+      - action: utter_show_delivery_area
+
+  - story: customer asks about shipping
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_delivery_time
+      - action: utter_show_delivery_time
+      - intent: ask_delivery_fee
+      - action: utter_show_delivery_fee
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_category
+      - action: action_show_categories
+
+  # Store information
+  - story: ask about store
+    steps:
+      - intent: ask_store_address
+      - action: utter_show_store_address
+      - intent: ask_working_hours
+      - action: utter_show_working_hours
+      - intent: ask_contact_support
+      - action: utter_show_contact_support
+
+  - story: customer wants to visit store
+    steps:
+      - intent: ask_store_address
+      - action: utter_show_store_address
+      - intent: ask_working_hours
+      - action: utter_show_working_hours
+      - intent: ask_contact_support
+      - action: utter_show_contact_support
+
+  # Payment methods
+  - story: ask about payment
+    steps:
+      - intent: ask_payment_method
+      - action: utter_show_payment_methods
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_brand
+      - action: action_show_brands
+
+  - story: customer chooses payment method
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_payment_method
+      - action: utter_show_payment_methods
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_color
+      - action: action_show_colors
+
+  # Shopping guide
+  - story: ask for shopping guide
+    steps:
+      - intent: ask_shopping_guide
+      - action: utter_show_shopping_guide
+      - intent: ask_payment_method
+      - action: utter_show_payment_methods
+
+  - story: new customer needs guidance
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_shopping_guide
+      - action: utter_show_shopping_guide
+      - intent: search_products
+      - action: utter_show_products
+
+  # Product reviews
+  - story: ask about product reviews
+    steps:
+      - intent: ask_product_review
+      - action: action_show_product_reviews
+      - intent: ask_product_info
+      - action: utter_show_product_info
+
+  - story: customer checks reviews before buying
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_review
+      - action: action_show_product_reviews
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_material
+      - action: action_show_strap_materials
+
+  # Complete customer journey
+  - story: full customer experience
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_shopping_guide
+      - action: utter_show_shopping_guide
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_product_info
+      - action: utter_show_product_info
+      - intent: ask_product_review
+      - action: action_show_product_reviews
+      - intent: ask_price
+      - action: action_show_price
+      - intent: ask_payment_method
+      - action: utter_show_payment_methods
+      - intent: ask_delivery_time
+      - action: utter_show_delivery_time
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_popular_watches
+      - action: action_show_popular_watches
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - story: customer with delivery concerns
+    steps:
+      - intent: search_products
+      - action: utter_show_products
+      - intent: ask_delivery_area
+      - action: utter_show_delivery_area
+      - intent: ask_delivery_time
+      - action: utter_show_delivery_time
+      - intent: ask_delivery_fee
+      - action: utter_show_delivery_fee
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_machine_type
+      - action: action_show_movement_types
+
+  - story: customer needs support
+    steps:
+      - intent: ask_contact_support
+      - action: utter_show_contact_support
+      - intent: ask_working_hours
+      - action: utter_show_working_hours
+      - intent: ask_store_address
+      - action: utter_show_store_address
+
+  # Popular watches and trending products
+  - story: ask about popular watches
+    steps:
+      - intent: ask_popular_watches
+      - action: action_show_popular_watches
+
+  - story: customer wants trending watches
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: ask_popular_watches
+      - action: action_show_popular_watches
+      - intent: ask_product_info
+      - action: utter_show_product_info
+
+  # Updated buying flow - consultation instead of direct purchase
+  - story: customer wants to buy - consultation flow
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_brand
+      - action: action_show_brands
+
+  - story: customer wants to buy - category consultation
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_category
+      - action: action_show_categories
+
+  - story: customer wants to buy - color consultation
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_color
+      - action: action_show_colors
+
+  - story: customer wants to buy - price consultation
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_price
+      - action: action_show_price
+
+  - story: customer wants to buy - material consultation
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_material
+      - action: action_show_strap_materials
+
+  - story: customer wants to buy - machine type consultation
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_machine_type
+      - action: action_show_movement_types
+
+  - story: customer wants to buy - popular watches consultation
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_popular_watches
+      - action: action_show_popular_watches
+
+  # Order status and tracking stories
+  - story: customer checks order status
+    steps:
+      - intent: ask_order_status
+      - action: action_show_order_status
+
+  - story: customer wants to view order details
+    steps:
+      - intent: ask_order_status
+      - action: action_show_order_status
+      - intent: view_order_detail
+      - action: action_show_order_status
+
+  - story: customer wants to track order
+    steps:
+      - intent: ask_order_status
+      - action: action_show_order_status
+      - intent: track_order
+      - action: action_show_order_status
+
+  - story: customer filters orders by status
+    steps:
+      - intent: ask_order_status
+      - action: action_show_order_status
+      - intent: filter_orders_by_status
+      - action: action_show_order_statuses
+
+  - story: customer checks order status after purchase
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+      - intent: ask_order_status
+      - action: action_show_order_status
+      - intent: view_order_detail
+      - action: action_show_order_status

@@ -1,0 +1,355 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - bot_challenge
+  - ask_consult
+  - search_products
+  - ask_brand
+  - ask_price
+  - ask_category
+  - ask_promotion
+  - ask_color
+  - ask_material
+  - ask_machine_type
+  - ask_warranty
+  - ask_exchange_return
+  - ask_order_status
+  - buy_product
+  - cancel_order
+  - ask_product_info
+  - ask_inventory
+  - ask_delivery_time
+  - ask_delivery_fee
+  - ask_delivery_area
+  - ask_store_address
+  - ask_payment_method
+  - ask_working_hours
+  - ask_contact_support
+  - ask_shopping_guide
+  - ask_product_review
+  - ask_popular_watches
+  - search_watches
+  - filter_products
+  - view_order_detail
+  - track_order
+  - filter_orders_by_status
+
+responses:
+  utter_greet:
+    - text: "Xin chào! Chào mừng bạn đến với shop của chúng tôi! Tôi có thể giúp gì cho bạn hôm nay?"
+    - text: "Chào bạn! Rất vui được phục vụ bạn! Bạn cần tư vấn gì về sản phẩm?"
+    - text: "Hello! Chào mừng bạn đến với shop online! Bạn muốn tìm sản phẩm gì?"
+    - text: "Xin chào! Tôi ở đây để hỗ trợ bạn chọn sản phẩm phù hợp nhất!"
+    - text: "Chào mừng bạn! Shop chúng tôi có nhiều sản phẩm đa dạng, bạn quan tâm gì?"
+
+  utter_goodbye:
+    - text: "Cảm ơn bạn đã ghé thăm shop! Chúc bạn một ngày tốt lành!"
+    - text: "Tạm biệt! Hẹn gặp lại bạn lần sau!"
+    - text: "Cảm ơn bạn! Nếu cần hỗ trợ gì thêm, hãy quay lại nhé!"
+    - text: "Chúc bạn mua sắm vui vẻ! Tạm biệt!"
+    - text: "Cảm ơn bạn đã tin tưởng shop chúng tôi! Hẹn gặp lại!"
+
+  utter_iamabot:
+    - text: "Tôi là trợ lý AI của shop, được thiết kế để hỗ trợ bạn tìm sản phẩm phù hợp nhất!"
+    - text: "Tôi là bot tư vấn sản phẩm thông minh, luôn sẵn sàng giúp bạn!"
+    - text: "Tôi là trợ lý ảo chuyên nghiệp, được đào tạo để tư vấn sản phẩm tốt nhất!"
+    - text: "Tôi là AI assistant của shop, có thể giúp bạn tìm sản phẩm mong muốn!"
+    - text: "Tôi là bot, nhưng tôi rất am hiểu về sản phẩm và luôn muốn giúp bạn!"
+
+  utter_show_products:
+    - text: "Đây là bộ sưu tập sản phẩm của chúng tôi. Bạn có thể xem các danh mục khác nhau:"
+    - text: "Tôi sẽ hiển thị các sản phẩm phổ biến nhất cho bạn:"
+    - text: "Dưới đây là những sản phẩm được yêu thích nhất:"
+    - text: "Bạn có thể xem các sản phẩm theo danh mục:"
+    - text: "Đây là danh sách sản phẩm hot nhất hiện tại:"
+
+  utter_show_brands:
+    - text: "Đang tải danh sách thương hiệu..."
+
+  utter_show_price:
+    - text: "Khoảng giá sản phẩm của chúng tôi: 💰\n\n💵 **Dưới 1 triệu**: Đồng hồ cơ bản, chất lượng tốt\n💵 **1-3 triệu**: Đồng hồ tầm trung, thiết kế đẹp\n💵 **3-10 triệu**: Đồng hồ cao cấp, thương hiệu uy tín\n💵 **10-30 triệu**: Đồng hồ luxury, sang trọng\n💵 **Trên 30 triệu**: Đồng hồ cao cấp nhất, độc quyền\n\n*Giá có thể thay đổi theo chương trình khuyến mãi*"
+    - text: "Đây là bảng giá theo phân khúc: 💳\n\n🟢 **Phổ thông**: 500k - 1.5 triệu\n🟡 **Tầm trung**: 1.5 - 5 triệu\n🟠 **Cao cấp**: 5 - 15 triệu\n🔴 **Luxury**: 15 - 50 triệu\n⚫ **Premium**: Trên 50 triệu\n\n*Tất cả sản phẩm đều có bảo hành chính hãng*"
+    - text: "Dưới đây là thông tin giá theo phân loại: 📊\n\n💰 **Đồng hồ nam**: 800k - 25 triệu\n💰 **Đồng hồ nữ**: 600k - 20 triệu\n💰 **Đồng hồ đôi**: 1.5 - 40 triệu\n💰 **Đồng hồ trẻ em**: 300k - 2 triệu\n💰 **Đồng hồ thể thao**: 1 - 15 triệu\n\n*Giá đã bao gồm thuế VAT*"
+    - text: "Bạn có thể xem giá tại đây: 💸\n\n🏷️ **Giá gốc**: Luôn cập nhật\n🏷️ **Giá khuyến mãi**: Giảm đến 30%\n🏷️ **Giá combo**: Mua 2 tặng 1\n🏷️ **Giá trả góp**: 0% lãi suất\n🏷️ **Giá thành viên**: Ưu đãi đặc biệt\n\n*Liên hệ để được tư vấn giá tốt nhất*"
+    - text: "Đây là giá sản phẩm hiện tại: 💎\n\n💎 **Rolex**: 15 - 200 triệu\n💎 **Omega**: 8 - 50 triệu\n💎 **Tissot**: 2 - 15 triệu\n💎 **Citizen**: 1 - 8 triệu\n💎 **Casio**: 300k - 5 triệu\n\n*Giá có thể thay đổi theo tỷ giá*"
+
+  utter_show_categories:
+    - text: "Chúng tôi có các danh mục sản phẩm sau: [Liệt kê danh mục]"
+    - text: "Đây là các phân loại sản phẩm trong shop:"
+    - text: "Bạn có thể chọn theo danh mục:"
+    - text: "Dưới đây là các loại sản phẩm chúng tôi có:"
+    - text: "Shop có nhiều danh mục đa dạng:"
+
+  utter_show_promotions:
+    - text: "Đang tải thông tin khuyến mãi..."
+
+  utter_show_colors:
+    - text: "Sản phẩm có các màu sắc sau: [Liệt kê màu sắc]"
+    - text: "Đây là các màu sắc có sẵn:"
+    - text: "Bạn có thể chọn từ các màu:"
+    - text: "Dưới đây là bảng màu sản phẩm:"
+    - text: "Shop có đa dạng màu sắc:"
+
+  utter_show_machine_types:
+    - text: "Chúng tôi có các loại máy: [Liệt kê loại máy]"
+    - text: "Đây là các loại máy có sẵn:"
+    - text: "Bạn có thể chọn loại máy phù hợp:"
+    - text: "Dưới đây là thông tin các loại máy:"
+    - text: "Shop có đa dạng loại máy:"
+
+  utter_show_product_info:
+    - text: "Đây là thông tin chi tiết về sản phẩm:"
+    - text: "Tôi sẽ cung cấp thông tin sản phẩm cho bạn:"
+    - text: "Dưới đây là mô tả sản phẩm:"
+    - text: "Bạn có thể xem thông tin sản phẩm tại đây:"
+    - text: "Đây là thông tin đầy đủ về sản phẩm:"
+
+  utter_show_warranty_info:
+    - text: "Chính sách bảo hành của chúng tôi: 🛡️\n\n⏰ **Thời gian bảo hành**: 2 năm chính hãng\n🔧 **Bảo hành miễn phí**: Sửa chữa, thay pin, điều chỉnh\n📋 **Điều kiện**: Còn nguyên tem, không va đập mạnh\n🏪 **Địa điểm**: Tất cả chi nhánh trên toàn quốc\n📞 **Hotline**: 1900-1234 (hỗ trợ 24/7)\n\n*Bảo hành quốc tế cho các thương hiệu cao cấp*"
+    - text: "Đây là thông tin bảo hành sản phẩm: ✅\n\n🛡️ **Bảo hành chính hãng**: 24 tháng\n🔧 **Bảo hành mở rộng**: Thêm 12 tháng\n⚡ **Bảo hành nhanh**: 3-5 ngày làm việc\n🚚 **Bảo hành tại nhà**: Miễn phí vận chuyển\n💳 **Bảo hành điện tử**: Quản lý qua app\n\n*Cam kết chất lượng 100%*"
+    - text: "Bạn có thể tham khảo chính sách bảo hành: 📋\n\n🏆 **Rolex**: 5 năm bảo hành quốc tế\n🏆 **Omega**: 3 năm bảo hành toàn cầu\n🏆 **Tissot**: 2 năm bảo hành chính hãng\n🏆 **Citizen**: 2 năm bảo hành + Eco-Drive\n🏆 **Casio**: 1 năm bảo hành + G-Shock\n\n*Tất cả đều có tem bảo hành chính hãng*"
+    - text: "Dưới đây là quy định bảo hành: 📄\n\n✅ **Được bảo hành**: Lỗi kỹ thuật, hư hỏng tự nhiên\n❌ **Không bảo hành**: Va đập, ngấm nước, tự ý sửa chữa\n📝 **Thủ tục**: Hóa đơn + tem bảo hành + sản phẩm\n⏱️ **Thời gian**: 7-14 ngày làm việc\n💰 **Chi phí**: Miễn phí trong thời hạn\n\n*Liên hệ để được hỗ trợ chi tiết*"
+    - text: "Shop có chính sách bảo hành rõ ràng: 🎯\n\n🔒 **Bảo hành chính hãng**: Đầy đủ quyền lợi\n🔄 **Đổi mới 100%**: Trong 30 ngày đầu\n📱 **App quản lý**: Theo dõi tình trạng bảo hành\n🏪 **Mạng lưới**: 50+ điểm bảo hành toàn quốc\n⭐ **Dịch vụ VIP**: Ưu tiên xử lý nhanh\n\n*Cam kết chất lượng dịch vụ tốt nhất*"
+
+  utter_show_exchange_return_policy:
+    - text: "Chính sách đổi trả của chúng tôi: 🔄\n\n⏰ **Thời gian đổi trả**: 30 ngày kể từ ngày mua\n✅ **Điều kiện**: Còn nguyên tem, hộp, phụ kiện\n🆓 **Miễn phí**: Đổi trả trong 7 ngày đầu\n💰 **Phí đổi trả**: 50k (sau 7 ngày)\n📦 **Vận chuyển**: Shop hỗ trợ 50% phí ship\n\n*Chỉ áp dụng cho sản phẩm không lỗi*"
+    - text: "Đây là quy định đổi trả sản phẩm: 📋\n\n🔄 **Đổi size**: Miễn phí trong 15 ngày\n🔄 **Đổi màu**: Miễn phí trong 10 ngày\n🔄 **Đổi model**: Bù tiền chênh lệch\n❌ **Không đổi**: Đã sử dụng, mất tem\n📱 **Thủ tục**: Qua app hoặc hotline\n\n*Cam kết chất lượng sản phẩm*"
+    - text: "Bạn có thể tham khảo chính sách đổi trả: 📝\n\n✅ **Được đổi**: Không vừa size, không ưng màu\n✅ **Được trả**: Lỗi kỹ thuật, không đúng mô tả\n✅ **Hoàn tiền**: 100% trong 3 ngày\n✅ **Đổi hàng**: Tương đương hoặc cao hơn\n✅ **Bảo lưu**: Giá trị đơn hàng 6 tháng\n\n*Dịch vụ khách hàng chuyên nghiệp*"
+    - text: "Dưới đây là điều kiện đổi trả: 📄\n\n🎯 **Đổi miễn phí**: 7 ngày đầu tiên\n💳 **Hoàn tiền**: Chuyển khoản trong 24h\n📦 **Đóng gói**: Giữ nguyên bao bì gốc\n📋 **Hóa đơn**: Mang theo khi đổi trả\n🏪 **Địa điểm**: Tất cả chi nhánh\n\n*Hỗ trợ tận tình, khách hàng hài lòng*"
+    - text: "Shop có chính sách đổi trả linh hoạt: 🎁\n\n🛍️ **Mua thử**: 30 ngày không hài lòng\n💎 **Đổi upgrade**: Bù tiền chênh lệch\n🎁 **Quà tặng**: Đổi sang sản phẩm khác\n📱 **Online**: Đổi trả qua app\n🚚 **Tại nhà**: Nhân viên đến tận nơi\n\n*Cam kết 100% hài lòng khách hàng*"
+
+  utter_show_order_status:
+    - text: "Tôi sẽ kiểm tra tình trạng đơn hàng cho bạn:"
+    - text: "Đây là thông tin đơn hàng hiện tại:"
+    - text: "Bạn có thể xem tình trạng đơn hàng:"
+    - text: "Dưới đây là cập nhật đơn hàng:"
+    - text: "Tôi đang kiểm tra trạng thái đơn hàng:"
+
+  utter_show_inventory:
+    - text: "Tôi sẽ kiểm tra tình trạng tồn kho:"
+    - text: "Đây là thông tin tồn kho hiện tại:"
+    - text: "Bạn có thể xem tình trạng hàng hóa:"
+    - text: "Dưới đây là cập nhật tồn kho:"
+    - text: "Tôi đang kiểm tra số lượng hàng:"
+
+  utter_confirm_purchase:
+    - text: "Bên em phân loại đồng hồ theo các tiêu chí dưới đây. Mình muốn tham khảo theo tiêu chí nào?"
+      buttons:
+        - title: "Thương hiệu"
+          payload: "shop có những thương hiệu nào"
+        - title: "Phân loại"
+          payload: "shop có những loại đồng hồ nào"
+        - title: "Màu sắc"
+          payload: "đồng hồ có màu gì"
+        - title: "Chất liệu dây đeo"
+          payload: "có những loại chất liệu dây nào"
+        - title: "Loại máy"
+          payload: "loại máy nào có ở shop"
+        - title: "Khoảng giá"
+          payload: "xem đồng hồ theo khoảng giá"
+        - title: "Đồng hồ bán chạy"
+          payload: "đồng hồ bán chạy"
+
+  utter_buy_options:
+    - text: "Bên em phân loại đồng hồ theo các tiêu chí dưới đây. Mình muốn tham khảo theo tiêu chí nào?"
+      buttons:
+        - title: "Thương hiệu"
+          payload: "shop có những thương hiệu nào"
+        - title: "Phân loại"
+          payload: "shop có những loại đồng hồ nào"
+        - title: "Màu sắc"
+          payload: "đồng hồ có màu gì"
+        - title: "Chất liệu dây đeo"
+          payload: "có những loại chất liệu dây nào"
+        - title: "Loại máy"
+          payload: "loại máy nào có ở shop"
+        - title: "Khoảng giá"
+          payload: "xem đồng hồ theo khoảng giá"
+        - title: "Khuyến mãi"
+          payload: "shop đang có khuyến mãi gì"
+        - title: "Bảo hành"
+          payload: "chính sách bảo hành như thế nào"
+        - title: "Đổi trả"
+          payload: "chính sách đổi trả ra sao"
+        - title: "Tình trạng đơn hàng"
+          payload: "tình trạng đơn hàng"
+        - title: "Thời gian giao hàng"
+          payload: "thời gian giao hàng bao lâu"
+        - title: "Phí giao hàng"
+          payload: "phí giao hàng bao nhiêu"
+        - title: "Khu vực giao hàng"
+          payload: "khu vực giao hàng"
+        - title: "Địa chỉ cửa hàng"
+          payload: "địa chỉ cửa hàng ở đâu"
+        - title: "Phương thức thanh toán"
+          payload: "có thanh toán momo vnpay cod không"
+        - title: "Thời gian làm việc"
+          payload: "thời gian làm việc"
+        - title: "Liên hệ hỗ trợ"
+          payload: "liên hệ hỗ trợ"
+        - title: "Hướng dẫn mua hàng"
+          payload: "hướng dẫn mua hàng"
+        - title: "Đánh giá sản phẩm"
+          payload: "đánh giá sản phẩm"
+        - title: "Đồng hồ bán chạy"
+          payload: "đồng hồ bán chạy"
+
+  utter_hoi_mua_dong_ho:
+    - text: "Bên em chia đồng hồ theo các danh mục như:"
+      buttons:
+        - title: "Thương hiệu"
+          payload: "shop có những thương hiệu nào"
+        - title: "Phân loại"
+          payload: "shop có những loại đồng hồ nào"
+        - title: "Màu sắc"
+          payload: "đồng hồ có màu gì"
+        - title: "Chất liệu"
+          payload: "có những loại chất liệu dây nào"
+        - title: "Loại máy"
+          payload: "loại máy nào có ở shop"
+        - title: "Khoảng giá"
+          payload: "xem đồng hồ theo khoảng giá"
+        - title: "Khuyến mãi"
+          payload: "shop đang có khuyến mãi gì"
+        - title: "Bảo hành"
+          payload: "chính sách bảo hành như thế nào"
+        - title: "Đổi trả"
+          payload: "chính sách đổi trả ra sao"
+        - title: "Tình trạng đơn hàng"
+          payload: "tình trạng đơn hàng"
+        - title: "Thời gian giao hàng"
+          payload: "thời gian giao hàng bao lâu"
+        - title: "Phí giao hàng"
+          payload: "phí giao hàng bao nhiêu"
+        - title: "Khu vực giao hàng"
+          payload: "khu vực giao hàng"
+        - title: "Địa chỉ cửa hàng"
+          payload: "địa chỉ cửa hàng ở đâu"
+        - title: "Phương thức thanh toán"
+          payload: "có thanh toán momo vnpay cod không"
+        - title: "Thời gian làm việc"
+          payload: "thời gian làm việc"
+        - title: "Liên hệ hỗ trợ"
+          payload: "liên hệ hỗ trợ"
+        - title: "Hướng dẫn mua hàng"
+          payload: "hướng dẫn mua hàng"
+        - title: "Đánh giá sản phẩm"
+          payload: "đánh giá sản phẩm"
+        - title: "Đồng hồ bán chạy"
+          payload: "đồng hồ bán chạy"
+
+  utter_confirm_cancellation:
+    - text: "Tôi sẽ hủy đơn hàng cho bạn ngay!"
+    - text: "Đơn hàng đã được hủy thành công!"
+    - text: "Tôi đang xử lý hủy đơn hàng:"
+    - text: "Đơn hàng của bạn đã được hủy:"
+    - text: "Cảm ơn bạn! Đơn hàng đã được hủy:"
+
+  utter_show_brand_promotions:
+    - text: "Đây là khuyến mãi đặc biệt cho thương hiệu này:"
+    - text: "Tôi sẽ hiển thị ưu đãi thương hiệu cho bạn:"
+    - text: "Dưới đây là các ưu đãi của thương hiệu:"
+    - text: "Bạn có thể xem khuyến mãi thương hiệu tại đây:"
+    - text: "Đây là danh sách khuyến mãi thương hiệu:"
+
+  utter_ask_other_products:
+    - text: "Không sao! Bạn có muốn xem sản phẩm khác không?"
+    - text: "Tôi có thể gợi ý sản phẩm khác phù hợp hơn:"
+    - text: "Bạn có thể tham khảo các sản phẩm khác:"
+    - text: "Tôi sẽ tìm sản phẩm phù hợp hơn cho bạn:"
+    - text: "Có sản phẩm nào khác bạn quan tâm không?"
+
+  utter_show_delivery_time:
+    - text: "Thời gian giao hàng của chúng tôi: 🚚\n\n• **Nội thành**: 1-2 ngày làm việc\n• **Ngoại thành**: 2-3 ngày làm việc\n• **Tỉnh khác**: 3-5 ngày làm việc\n• **Miền núi**: 5-7 ngày làm việc\n\n*Lưu ý: Không giao hàng vào cuối tuần và ngày lễ*"
+    - text: "Đây là thông tin thời gian giao hàng: ⏰\n\n🏙️ **Thành phố lớn**: 1-2 ngày\n🏘️ **Thành phố nhỏ**: 2-3 ngày\n🏔️ **Vùng sâu vùng xa**: 3-5 ngày\n\n*Giao hàng từ thứ 2 đến thứ 6*"
+    - text: "Dưới đây là thời gian giao hàng chi tiết: 📦\n\n✅ **Hà Nội, TP.HCM**: 1 ngày\n✅ **Đà Nẵng, Cần Thơ**: 2 ngày\n✅ **Các tỉnh khác**: 3-4 ngày\n✅ **Vùng núi, hải đảo**: 5-7 ngày\n\n*Thời gian tính từ khi xác nhận đơn hàng*"
+    - text: "Bạn có thể xem thời gian giao hàng tại đây: 🕐\n\n🚀 **Giao nhanh**: 1-2 ngày (nội thành)\n🚛 **Giao thường**: 2-3 ngày (ngoại thành)\n🚚 **Giao xa**: 3-5 ngày (tỉnh khác)\n\n*Không giao hàng chủ nhật*"
+    - text: "Đây là thông tin giao hàng hiện tại: 📍\n\n⏱️ **Nội thành**: 1-2 ngày\n⏱️ **Ngoại thành**: 2-3 ngày\n⏱️ **Tỉnh khác**: 3-5 ngày\n⏱️ **Miền núi**: 5-7 ngày\n\n*Thời gian có thể thay đổi do thời tiết*"
+
+  utter_show_delivery_fee:
+    - text: "Phí giao hàng của chúng tôi: 💰\n\n• **Miễn phí**: Đơn hàng từ 500.000đ\n• **Nội thành**: 30.000đ\n• **Ngoại thành**: 50.000đ\n• **Tỉnh khác**: 80.000đ\n• **Miền núi**: 120.000đ\n\n*Áp dụng cho đơn hàng dưới 500.000đ*"
+    - text: "Đây là bảng phí giao hàng: 🚚\n\n🆓 **FREE SHIP**: Từ 500k\n💰 **Nội thành**: 30k\n💰 **Ngoại thành**: 50k\n💰 **Tỉnh khác**: 80k\n💰 **Vùng xa**: 120k\n\n*Giá chưa bao gồm thuế*"
+    - text: "Dưới đây là thông tin phí ship: 📦\n\n✅ **Miễn phí**: Đơn từ 500.000đ\n✅ **Nội thành**: 30.000đ\n✅ **Ngoại thành**: 50.000đ\n✅ **Tỉnh khác**: 80.000đ\n✅ **Miền núi**: 120.000đ\n\n*Phí ship có thể thay đổi*"
+    - text: "Bạn có thể xem phí giao hàng tại đây: 💳\n\n🆓 **FREE**: Từ 500k\n💵 **Nội thành**: 30k\n💵 **Ngoại thành**: 50k\n💵 **Tỉnh khác**: 80k\n💵 **Vùng xa**: 120k\n\n*Áp dụng cho đơn dưới 500k*"
+    - text: "Đây là phí vận chuyển hiện tại: 🚛\n\n🆓 **Miễn phí**: Đơn hàng từ 500.000đ\n💸 **Nội thành**: 30.000đ\n💸 **Ngoại thành**: 50.000đ\n💸 **Tỉnh khác**: 80.000đ\n💸 **Miền núi**: 120.000đ\n\n*Phí ship có thể thay đổi*"
+
+  utter_show_delivery_area:
+    - text: "Khu vực giao hàng của chúng tôi: 🗺️\n\n✅ **Toàn quốc Việt Nam**\n✅ **Hà Nội & TP.HCM**: Giao nhanh\n✅ **Đà Nẵng, Cần Thơ**: Giao thường\n✅ **Các tỉnh khác**: Giao xa\n✅ **Miền núi, hải đảo**: Giao đặc biệt\n\n*Không giao hàng quốc tế*"
+    - text: "Đây là các khu vực chúng tôi giao hàng: 📍\n\n🏙️ **Thành phố lớn**: Hà Nội, TP.HCM, Đà Nẵng\n🏘️ **Thành phố nhỏ**: Các tỉnh thành khác\n🏔️ **Vùng sâu vùng xa**: Miền núi, hải đảo\n\n*Giao hàng toàn quốc Việt Nam*"
+    - text: "Dưới đây là danh sách khu vực giao hàng: 🚚\n\n✅ **Miền Bắc**: Hà Nội, Hải Phòng, Quảng Ninh...\n✅ **Miền Trung**: Đà Nẵng, Huế, Nha Trang...\n✅ **Miền Nam**: TP.HCM, Cần Thơ, Đồng Nai...\n✅ **Tây Nguyên**: Đắk Lắk, Gia Lai, Kon Tum...\n\n*Giao hàng tất cả 63 tỉnh thành*"
+    - text: "Bạn có thể xem khu vực giao hàng tại đây: 🌍\n\n🇻🇳 **Việt Nam**: Tất cả 63 tỉnh thành\n🏙️ **Thành phố lớn**: Giao nhanh 1-2 ngày\n🏘️ **Thành phố nhỏ**: Giao thường 2-3 ngày\n🏔️ **Vùng xa**: Giao đặc biệt 3-5 ngày\n\n*Không giao hàng nước ngoài*"
+    - text: "Đây là thông tin giao hàng theo khu vực: 📦\n\n📍 **Nội thành**: 1-2 ngày\n📍 **Ngoại thành**: 2-3 ngày\n📍 **Tỉnh khác**: 3-5 ngày\n📍 **Miền núi**: 5-7 ngày\n\n*Giao hàng toàn quốc Việt Nam*"
+
+  utter_show_store_address:
+    - text: "Địa chỉ cửa hàng của chúng tôi: 🏪\n\n📍 **Trụ sở chính**: 123 Đường ABC, Quận 1, TP.HCM\n📍 **Chi nhánh Hà Nội**: 456 Đường XYZ, Quận Cầu Giấy, Hà Nội\n📍 **Chi nhánh Đà Nẵng**: 789 Đường DEF, Quận Hải Châu, Đà Nẵng\n\n*Mở cửa từ 8:00 - 22:00 hàng ngày*"
+    - text: "Đây là thông tin địa chỉ shop: 🏬\n\n🏢 **Showroom chính**: 123 Đường ABC, Quận 1, TP.HCM\n🏢 **Showroom Hà Nội**: 456 Đường XYZ, Quận Cầu Giấy, Hà Nội\n🏢 **Showroom Đà Nẵng**: 789 Đường DEF, Quận Hải Châu, Đà Nẵng\n\n*Có bãi đỗ xe miễn phí*"
+    - text: "Dưới đây là địa chỉ chi tiết: 📍\n\n🏪 **Trụ sở**: 123 Đường ABC, Quận 1, TP.HCM\n🏪 **Chi nhánh**: 456 Đường XYZ, Quận Cầu Giấy, Hà Nội\n🏪 **Chi nhánh**: 789 Đường DEF, Quận Hải Châu, Đà Nẵng\n\n*Gần trung tâm thương mại*"
+    - text: "Bạn có thể xem địa chỉ tại đây: 🗺️\n\n📍 **TP.HCM**: 123 Đường ABC, Quận 1\n📍 **Hà Nội**: 456 Đường XYZ, Quận Cầu Giấy\n📍 **Đà Nẵng**: 789 Đường DEF, Quận Hải Châu\n\n*Có Google Maps để chỉ đường*"
+    - text: "Đây là địa chỉ hiện tại của shop: 🏪\n\n🏢 **Trụ sở chính**: 123 Đường ABC, Quận 1, TP.HCM\n🏢 **Chi nhánh Hà Nội**: 456 Đường XYZ, Quận Cầu Giấy, Hà Nội\n🏢 **Chi nhánh Đà Nẵng**: 789 Đường DEF, Quận Hải Châu, Đà Nẵng\n\n*Có bãi đỗ xe và wifi miễn phí*"
+
+  utter_show_payment_methods:
+    - text: "Phương thức thanh toán khả dụng: 💳\n\n• **MoMo** (ví điện tử)\n• **VNPay** (cổng thanh toán)\n• **COD** (trả tiền khi nhận hàng)\n• **Chuyển khoản ngân hàng**\n• **Thẻ tín dụng/ghi nợ**"
+    - text: "Các cách thanh toán hỗ trợ: 💰\n\n✅ **MoMo**\n✅ **VNPay**\n✅ **COD**\n✅ **Chuyển khoản**\n✅ **Thẻ ngân hàng**"
+    - text: "Danh sách phương thức thanh toán: 🏦\n\n🔸 **MoMo**\n🔸 **VNPay**\n🔸 **COD**\n🔸 **Chuyển khoản ngân hàng**\n🔸 **Visa/Mastercard**"
+    - text: "Shop hỗ trợ thanh toán: 💳 MoMo, VNPay, COD, chuyển khoản, thẻ ngân hàng."
+    - text: "Thông tin thanh toán: MoMo • VNPay • COD • Chuyển khoản • Thẻ ngân hàng."
+
+  utter_show_working_hours:
+    - text: "Thời gian làm việc của chúng tôi: 🕐\n\n⏰ **Thứ 2 - Thứ 6**: 8:00 - 22:00\n⏰ **Thứ 7**: 8:00 - 20:00\n⏰ **Chủ nhật**: 9:00 - 18:00\n⏰ **Ngày lễ**: 9:00 - 17:00\n\n*Hỗ trợ online 24/7*"
+    - text: "Đây là giờ mở cửa shop: 🏪\n\n🕐 **Ngày thường**: 8:00 - 22:00\n🕐 **Cuối tuần**: 9:00 - 20:00\n🕐 **Ngày lễ**: 9:00 - 17:00\n🕐 **Tết**: 10:00 - 16:00\n\n*Chat hỗ trợ 24/7*"
+    - text: "Dưới đây là lịch làm việc: 📅\n\n✅ **Thứ 2-6**: 8:00 - 22:00\n✅ **Thứ 7**: 8:00 - 20:00\n✅ **Chủ nhật**: 9:00 - 18:00\n✅ **Ngày lễ**: 9:00 - 17:00\n\n*Hotline: 24/7*"
+    - text: "Bạn có thể xem giờ mở cửa tại đây: 🕒\n\n🏪 **Cửa hàng**: 8:00 - 22:00 (T2-T6)\n🏪 **Cửa hàng**: 9:00 - 20:00 (T7-CN)\n💻 **Online**: 24/7\n📞 **Hotline**: 24/7\n\n*Luôn sẵn sàng hỗ trợ*"
+    - text: "Đây là thời gian hoạt động hiện tại: ⏰\n\n🕐 **Ngày thường**: 8:00 - 22:00\n🕐 **Cuối tuần**: 9:00 - 20:00\n🕐 **Ngày lễ**: 9:00 - 17:00\n🕐 **Tết**: 10:00 - 16:00\n\n*Chat bot hoạt động 24/7*"
+
+  utter_show_contact_support:
+    - text: "Thông tin liên hệ hỗ trợ: 📞\n\n📞 **Hotline**: 1900-1234 (24/7)\n📱 **Zalo**: 0901-234-567\n💬 **Facebook**: @shopname\n📧 **Email**: support@shop.com\n🌐 **Website**: www.shop.com\n\n*Hỗ trợ 24/7 qua tất cả kênh*"
+    - text: "Đây là các kênh hỗ trợ khách hàng: 💬\n\n📞 **Hotline**: 1900-1234\n📱 **Zalo**: 0901-234-567\n💬 **Facebook**: @shopname\n📧 **Email**: support@shop.com\n🌐 **Website**: www.shop.com\n\n*Luôn sẵn sàng hỗ trợ*"
+    - text: "Dưới đây là thông tin liên hệ: 📱\n\n📞 **Hotline**: 1900-1234 (24/7)\n📱 **Zalo**: 0901-234-567\n💬 **Facebook**: @shopname\n📧 **Email**: support@shop.com\n🌐 **Website**: www.shop.com\n\n*Hỗ trợ qua nhiều kênh*"
+    - text: "Bạn có thể liên hệ qua các kênh sau: 🔗\n\n📞 **Hotline**: 1900-1234\n📱 **Zalo**: 0901-234-567\n💬 **Facebook**: @shopname\n📧 **Email**: support@shop.com\n🌐 **Website**: www.shop.com\n\n*Hỗ trợ 24/7*"
+    - text: "Đây là thông tin hỗ trợ khách hàng: 🆘\n\n📞 **Hotline**: 1900-1234 (24/7)\n📱 **Zalo**: 0901-234-567\n💬 **Facebook**: @shopname\n📧 **Email**: support@shop.com\n🌐 **Website**: www.shop.com\n\n*Luôn sẵn sàng giúp đỡ*"
+
+  utter_show_shopping_guide:
+    - text: "Hướng dẫn mua hàng tại shop: 🛒\n\n1️⃣ **Chọn sản phẩm** - Tìm sản phẩm phù hợp\n2️⃣ **Thêm vào giỏ** - Click 'Thêm vào giỏ hàng'\n3️⃣ **Kiểm tra giỏ** - Xem lại sản phẩm đã chọn\n4️⃣ **Thanh toán** - Chọn phương thức thanh toán\n5️⃣ **Xác nhận** - Nhận mã đơn hàng\n6️⃣ **Nhận hàng** - Chờ giao hàng\n\n*Hỗ trợ 24/7 nếu cần giúp đỡ*"
+    - text: "Đây là quy trình mua hàng chi tiết: 📋\n\n🛍️ **Bước 1**: Chọn sản phẩm\n🛍️ **Bước 2**: Thêm vào giỏ hàng\n🛍️ **Bước 3**: Kiểm tra đơn hàng\n🛍️ **Bước 4**: Chọn thanh toán\n🛍️ **Bước 5**: Xác nhận đơn hàng\n🛍️ **Bước 6**: Chờ giao hàng\n\n*Đơn giản và nhanh chóng*"
+    - text: "Dưới đây là hướng dẫn từng bước: 📝\n\n1️⃣ **Tìm sản phẩm** - Dùng thanh tìm kiếm\n2️⃣ **Xem chi tiết** - Click vào sản phẩm\n3️⃣ **Thêm giỏ** - Click 'Thêm vào giỏ'\n4️⃣ **Thanh toán** - Chọn MoMo/VNPay/COD\n5️⃣ **Xác nhận** - Nhận mã đơn hàng\n6️⃣ **Theo dõi** - Kiểm tra tình trạng đơn\n\n*Hỗ trợ qua chat nếu cần*"
+    - text: "Bạn có thể xem hướng dẫn tại đây: 📖\n\n🛒 **Chọn sản phẩm** → Thêm vào giỏ\n🛒 **Kiểm tra giỏ** → Chọn thanh toán\n🛒 **Thanh toán** → Xác nhận đơn hàng\n🛒 **Nhận hàng** → Đánh giá sản phẩm\n\n*Quy trình đơn giản, dễ dàng*"
+    - text: "Đây là cách mua hàng tại shop: 🏪\n\n1️⃣ **Tìm kiếm** - Tìm sản phẩm mong muốn\n2️⃣ **Chọn mua** - Thêm vào giỏ hàng\n3️⃣ **Thanh toán** - Chọn phương thức phù hợp\n4️⃣ **Xác nhận** - Nhận mã đơn hàng\n5️⃣ **Nhận hàng** - Chờ giao hàng\n\n*Hỗ trợ 24/7 qua chat*"
+
+  utter_show_product_reviews:
+    - text: "Đánh giá sản phẩm từ khách hàng: ⭐\n\n⭐ **5 sao**: 95% khách hàng hài lòng\n⭐ **4 sao**: 4% khách hàng khá hài lòng\n⭐ **3 sao**: 1% khách hàng bình thường\n\n*Dựa trên 1000+ đánh giá thực tế*"
+    - text: "Đây là nhận xét của khách hàng: 💬\n\n✅ **Chất lượng tốt**: 98% khách hàng\n✅ **Giao hàng nhanh**: 96% khách hàng\n✅ **Giá cả hợp lý**: 94% khách hàng\n✅ **Dịch vụ tốt**: 97% khách hàng\n\n*Từ 500+ khách hàng thực tế*"
+    - text: "Dưới đây là feedback từ người dùng: 📝\n\n🌟 **Xuất sắc**: 95% đánh giá\n🌟 **Tốt**: 4% đánh giá\n🌟 **Bình thường**: 1% đánh giá\n\n*Dựa trên 800+ đánh giá*"
+    - text: "Bạn có thể xem đánh giá tại đây: 📊\n\n⭐ **Đánh giá trung bình**: 4.8/5\n⭐ **Số lượng đánh giá**: 1000+\n⭐ **Tỷ lệ hài lòng**: 98%\n⭐ **Tỷ lệ mua lại**: 85%\n\n*Đánh giá từ khách hàng thực tế*"
+    - text: "Đây là review sản phẩm hiện tại: 📈\n\n🏆 **Xếp hạng**: 4.8/5 sao\n🏆 **Số đánh giá**: 1000+\n🏆 **Hài lòng**: 98%\n🏆 **Mua lại**: 85%\n\n*Dựa trên feedback thực tế*"
+
+  utter_show_popular_watches:
+    - text: "Đang tải danh sách đồng hồ bán chạy..."
+
+  utter_show_movement_types:
+    - text: "Đang tải danh sách loại máy..."
+
+  utter_show_strap_materials:
+    - text: "Đang tải danh sách chất liệu dây đeo..."
+
+actions:
+  - action_show_brands
+  - action_show_categories
+  - action_show_colors
+  - action_show_popular_watches
+  - action_show_movement_types
+  - action_show_strap_materials
+  - action_show_price
+  - action_show_product_reviews
+  - action_search_products
+  - action_filter_products
+  - action_show_order_status
+  - action_show_order_statuses
+  - action_show_promotions
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

@@ -1,0 +1,67 @@
+version: "3.1"
+
+rules:
+  - rule: Show buy options when user wants to buy
+    steps:
+      - intent: buy_product
+      - action: utter_buy_options
+
+  - rule: Show buy options when user asks for consultation
+    steps:
+      - intent: ask_consult
+      - action: utter_buy_options
+
+  - rule: Say goodbye anytime the user says goodbye
+    steps:
+      - intent: goodbye
+      - action: utter_goodbye
+
+  - rule: Say 'I am a bot' anytime the user challenges
+    steps:
+      - intent: bot_challenge
+      - action: utter_iamabot
+
+  - rule: Show categories when user asks about categories
+    steps:
+      - intent: ask_category
+      - action: action_show_categories
+
+  - rule: Show colors when user asks about colors
+    steps:
+      - intent: ask_color
+      - action: action_show_colors
+
+  - rule: Show brands when user asks about brands
+    steps:
+      - intent: ask_brand
+      - action: action_show_brands
+
+  - rule: Show movement types when user asks about machine types
+    steps:
+      - intent: ask_machine_type
+      - action: action_show_movement_types
+
+  - rule: Show strap materials when user asks about materials
+    steps:
+      - intent: ask_material
+      - action: action_show_strap_materials
+
+  - rule: Force loading then fetch strap materials
+    steps:
+      - intent: ask_material
+      - action: action_show_strap_materials
+
+  - rule: Show popular watches when user asks
+    steps:
+      - intent: ask_popular_watches
+      - action: action_show_popular_watches
+
+  - rule: Search watches when user wants to search
+    steps:
+      - intent: search_watches
+      - action: action_search_products
+
+  - rule: Filter products when FE sends filter request
+    steps:
+      - intent: filter_products
+      - action: action_filter_products

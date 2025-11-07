@@ -1,0 +1,1132 @@
+version: "3.1"
+
+nlu:
+  - intent: greet
+    examples: |
+      - xin chào
+      - chào bạn
+      - hello
+      - hi
+      - chào shop
+      - chào anh/chị
+      - good morning
+      - good evening
+      - chào buổi sáng
+      - chào buổi tối
+      - hey there
+      - let's go
+      - hey dude
+      - goodmorning
+      - goodevening
+      - good afternoon
+
+  - intent: goodbye
+    examples: |
+      - tạm biệt
+      - chào tạm biệt
+      - bye
+      - goodbye
+      - hẹn gặp lại
+      - chúc ngủ ngon
+      - good night
+      - chúc một ngày tốt lành
+      - have a nice day
+      - bye bye
+      - see you later
+      - gặp lại sau nhé
+      - chào nhé
+      - thôi tôi đi đây
+      - tôi phải đi rồi
+
+  - intent: affirm
+    examples: |
+      - có
+      - yes
+      - y
+      - đúng rồi
+      - chính xác
+      - indeed
+      - of course
+      - tất nhiên
+      - that sounds good
+      - nghe hay đấy
+      - correct
+      - đúng vậy
+      - ok
+      - được
+      - tôi đồng ý
+      - chắc chắn rồi
+
+  - intent: deny
+    examples: |
+      - không
+      - no
+      - n
+      - never
+      - không bao giờ
+      - I don't think so
+      - tôi không nghĩ vậy
+      - don't like that
+      - không thích
+      - no way
+      - không thể
+      - not really
+      - không hẳn
+      - không cần
+      - thôi
+      - không muốn
+
+  - intent: bot_challenge
+    examples: |
+      - are you a bot?
+      - bạn có phải là bot không
+      - are you a human?
+      - bạn có phải là người không
+      - am I talking to a bot?
+      - tôi có đang nói chuyện với bot không
+      - am I talking to a human?
+      - tôi có đang nói chuyện với người không
+      - bạn là ai
+      - bạn là bot hay người
+      - có phải máy tính không
+      - có phải người thật không
+
+  - intent: search_products
+    examples: |
+      - tôi muốn tìm sản phẩm
+      - có sản phẩm nào không
+      - show cho tôi sản phẩm
+      - tôi cần mua sản phẩm
+      - có sản phẩm nam không
+      - có sản phẩm nữ không
+      - sản phẩm đẹp
+      - sản phẩm nào đẹp
+      - tìm sản phẩm cho tôi
+      - có sản phẩm nào bán không
+      - shop có sản phẩm gì
+      - muốn xem sản phẩm
+      - cho tôi xem sản phẩm
+      - có sản phẩm nào hay không
+      - tìm kiếm sản phẩm
+      - browse sản phẩm
+      - xem sản phẩm
+
+  - intent: ask_brand
+    examples: |
+      - shop có những thương hiệu nào
+      - có thương hiệu nào
+      - thương hiệu nào tốt
+      - brand nào đẹp
+      - thương hiệu nào uy tín
+      - brand nào nổi tiếng
+      - thương hiệu nào chất lượng
+      - brand nào giá rẻ
+      - thương hiệu nào cao cấp
+      - brand nào phổ biến
+      - thương hiệu nào được yêu thích
+      - brand nào đáng mua
+      - thương hiệu nào bền
+      - brand nào sang trọng
+      - thương hiệu nào hiện đại
+      - brand nào cổ điển
+      - thương hiệu nào thể thao
+      - brand nào công sở
+      - thương hiệu nào thời trang
+      - brand nào vintage
+      - thương hiệu nào luxury
+
+  - intent: ask_price
+    examples: |
+      - xem đồng hồ theo khoảng giá
+      - sản phẩm này giá bao nhiêu
+      - giá sản phẩm là bao nhiêu
+      - sản phẩm này bao nhiêu tiền
+      - giá bao nhiêu
+      - có giá không
+      - giá cả thế nào
+      - sản phẩm giá mấy
+      - bao nhiêu tiền
+      - giá sản phẩm này
+      - sản phẩm giá bao nhiêu
+      - có rẻ không
+      - giá có hợp lý không
+      - sản phẩm giá bao nhiêu
+      - giá bán là bao nhiêu
+      - sản phẩm giá mấy
+      - có đắt không
+      - giá có ưu đãi không
+      - sản phẩm giá bao nhiêu
+      - giá gốc là bao nhiêu
+      - sản phẩm giá mấy
+      - giá hiện tại
+      - sản phẩm giá bao nhiêu
+      - giá cuối cùng
+      - sản phẩm giá mấy
+      - giá có giảm không
+      - sản phẩm giá bao nhiêu
+      - giá khuyến mãi
+      - sản phẩm giá mấy
+      - giá có phù hợp không
+      - sản phẩm giá bao nhiêu
+      - giá bán lẻ
+      - sản phẩm giá mấy
+      - giá có cạnh tranh không
+      - sản phẩm giá bao nhiêu
+      - giá thị trường
+      - sản phẩm giá mấy
+      - giá có tốt không
+      - sản phẩm giá bao nhiêu
+      - giá có rẻ hơn chỗ khác không
+      - sản phẩm giá mấy
+      - giá có đặc biệt không
+      - sản phẩm giá bao nhiêu
+      - giá có ưu đãi đặc biệt không
+      - sản phẩm giá mấy
+      - giá có giảm giá không
+      - sản phẩm giá bao nhiêu
+      - giá có khuyến mãi không
+      - sản phẩm giá mấy
+      - giá có combo không
+      - sản phẩm giá bao nhiêu
+      - giá có gói ưu đãi không
+      - sản phẩm giá mấy
+      - giá có trả góp không
+      - sản phẩm giá bao nhiêu
+      - giá có thanh toán linh hoạt không
+      - sản phẩm giá mấy
+      - giá có bảo hành không
+      - sản phẩm giá bao nhiêu
+      - giá có phụ kiện kèm theo không
+
+  - intent: ask_category
+    examples: |
+      - shop có những loại đồng hồ nào
+      - có phân loại nào
+      - phân loại sản phẩm
+      - danh mục nào có
+      - loại sản phẩm nào
+      - category nào
+      - phân loại theo gì
+      - danh mục sản phẩm
+      - loại nào phổ biến
+      - category nào hot
+      - phân loại theo giá
+      - danh mục theo thương hiệu
+      - loại theo tính năng
+      - category theo style
+      - phân loại theo size
+      - danh mục theo màu
+      - loại theo chất liệu
+      - category theo độ tuổi
+      - phân loại theo giới tính
+      - danh mục theo mùa
+      - loại theo dịp
+
+  - intent: ask_promotion
+    examples: |
+      - shop đang có khuyến mãi gì
+      - có khuyến mãi gì không
+      - có ưu đãi gì
+      - có giảm giá không
+      - có sale không
+      - có discount không
+      - có ưu đãi đặc biệt không
+      - có combo nào không
+      - có gói ưu đãi không
+      - có trả góp không
+      - có thanh toán linh hoạt không
+      - có bảo hành không
+      - có phụ kiện kèm theo không
+      - có tặng kèm gì không
+      - có quà tặng không
+      - có voucher không
+      - có coupon không
+      - có mã giảm giá không
+      - có chương trình khuyến mãi không
+      - có event nào không
+      - có festival không
+
+  - intent: ask_color
+    examples: |
+      - đồng hồ có màu gì
+      - có màu gì
+      - màu sắc
+      - màu sắc gì
+      - có màu sắc gì
+      - màu nào đẹp
+      - có màu đen không
+      - có màu trắng không
+      - có màu vàng không
+      - có màu bạc không
+      - có màu xanh không
+      - có màu đỏ không
+      - có màu hồng không
+      - có màu tím không
+      - có màu cam không
+      - có màu nâu không
+      - có màu xám không
+      - có màu vàng gold không
+      - có màu rose gold không
+      - có màu platinum không
+      - có màu rainbow không
+      - có màu gradient không
+      - có màu ombre không
+      - có màu metallic không
+
+  - intent: ask_material
+    examples: |
+      - có những loại chất liệu dây nào
+      - dây da hay kim loại đẹp hơn
+      - tư vấn chất liệu dây
+      - dây da có bền không
+      - dây kim loại có tốt không
+      - dây silicon có mềm không
+      - dây nylon có nhẹ không
+      - dây carbon có chắc không
+      - dây titanium có nhẹ không
+      - dây thép có bền không
+      - dây vàng có đẹp không
+      - dây bạc có sang không
+      - dây platinum có quý không
+      - dây ceramic có chống xước không
+      - dây sapphire có trong suốt không
+      - dây gỗ có tự nhiên không
+      - dây vải có thoải mái không
+      - dây cao su có chống nước không
+      - dây nhựa có rẻ không
+      - dây composite có nhẹ không
+      - dây alloy có bền không
+
+  - intent: ask_machine_type
+    examples: |
+      - loại máy nào có ở shop
+      - loại máy nào tốt
+      - máy automatic hay quartz
+      - máy nào chính xác hơn
+      - máy nào bền hơn
+      - máy nào dễ bảo trì
+      - máy nào đắt hơn
+      - máy nào rẻ hơn
+      - máy nào phổ biến
+      - máy nào sang trọng
+      - máy nào hiện đại
+      - máy nào cổ điển
+      - máy nào thể thao
+      - máy nào công sở
+      - máy nào thời trang
+      - máy nào vintage
+      - máy nào luxury
+      - máy nào smart
+      - máy nào hybrid
+      - máy nào solar
+      - máy nào kinetic
+
+  - intent: ask_warranty
+    examples: |
+      - chính sách bảo hành như thế nào
+      - sản phẩm bảo hành bao lâu
+      - bảo hành bao lâu
+      - sản phẩm có bảo hành không
+      - bảo hành có bao lâu
+      - sản phẩm bảo hành mấy năm
+      - bảo hành có toàn cầu không
+      - sản phẩm bảo hành bao lâu
+      - bảo hành có miễn phí không
+      - sản phẩm bảo hành mấy năm
+      - bảo hành có bao gồm gì
+      - sản phẩm bảo hành bao lâu
+      - bảo hành có thay thế không
+      - sản phẩm bảo hành mấy năm
+      - bảo hành có sửa chữa không
+      - sản phẩm bảo hành bao lâu
+      - bảo hành có bảo dưỡng không
+      - sản phẩm bảo hành mấy năm
+      - bảo hành có kiểm tra không
+      - sản phẩm bảo hành bao lâu
+      - bảo hành có vệ sinh không
+
+  - intent: ask_exchange_return
+    examples: |
+      - chính sách đổi trả ra sao
+      - có đổi trả không
+      - chính sách đổi trả
+      - có thể đổi không
+      - có thể trả không
+      - đổi trả trong bao lâu
+      - đổi trả có điều kiện gì
+      - đổi trả có phí không
+      - đổi trả có miễn phí không
+      - đổi trả có giới hạn không
+      - đổi trả có thời gian không
+      - đổi trả có lý do không
+      - đổi trả có chứng từ không
+      - đổi trả có hóa đơn không
+      - đổi trả có tem không
+      - đổi trả có bao bì không
+      - đổi trả có phụ kiện không
+      - đổi trả có hướng dẫn không
+      - đổi trả có giấy tờ không
+      - đổi trả có chứng minh không
+      - đổi trả có xác nhận không
+
+  - intent: ask_order_status
+    examples: |
+      - tình trạng đơn hàng
+      - đơn hàng thế nào
+      - đơn hàng đã giao chưa
+      - đơn hàng đang ở đâu
+      - đơn hàng có giao không
+      - đơn hàng có ship không
+      - đơn hàng có vận chuyển không
+      - đơn hàng có gửi không
+      - đơn hàng có chuyển không
+      - đơn hàng có đến không
+      - đơn hàng có nhận không
+      - đơn hàng có lấy không
+      - đơn hàng có mua không
+      - đơn hàng có bán không
+      - đơn hàng có còn không
+      - đơn hàng có hết không
+      - đơn hàng có đủ không
+      - đơn hàng có thiếu không
+      - đơn hàng có đúng không
+      - đơn hàng có sai không
+
+  - intent: buy_product
+    examples: |
+      - tôi muốn mua đồng hồ
+      - tôi muốn mua một chiếc đồng hồ
+      - mua đồng hồ
+      - tư vấn mua đồng hồ giúp tôi
+      - tôi muốn tham khảo đồng hồ
+      - gợi ý cho tôi đồng hồ phù hợp
+      - tôi muốn xem các mẫu đồng hồ
+      - tôi muốn mua sản phẩm này
+      - mua sản phẩm
+      - tôi cần mua sản phẩm
+  - intent: ask_consult
+    examples: |
+      - tư vấn cho tôi
+      - tư vấn giúp tôi
+      - cho tôi xin tư vấn
+      - cần tư vấn mua hàng
+      - tư vấn mua hàng giúp tôi
+      - gợi ý sản phẩm phù hợp
+      - tư vấn đồng hồ giúp tôi
+      - tôi cần tư vấn
+      - tư vấn giúp
+      - tư vấn giúp với
+      - mua sản phẩm
+      - tôi muốn đặt mua sản phẩm
+      - mua sản phẩm
+      - tôi cần mua sản phẩm
+      - mua sản phẩm
+      - tôi muốn mua sản phẩm
+      - mua sản phẩm
+      - tôi cần mua sản phẩm
+      - mua sản phẩm
+      - tôi muốn mua sản phẩm
+      - mua sản phẩm
+      - tôi cần mua sản phẩm
+      - mua sản phẩm
+      - tôi muốn mua sản phẩm
+      - mua sản phẩm
+      - tôi cần mua sản phẩm
+      - mua sản phẩm
+
+  - intent: cancel_order
+    examples: |
+      - hủy đơn hàng
+      - tôi muốn hủy đơn
+      - hủy đơn hàng này
+      - tôi cần hủy đơn
+      - hủy đơn hàng
+      - tôi muốn hủy đơn hàng
+      - hủy đơn đi
+      - tôi cần hủy đơn hàng
+      - hủy đơn hàng này đi
+      - tôi muốn hủy đơn hàng
+      - hủy đơn hàng sản phẩm
+      - tôi cần hủy đơn hàng
+      - hủy đơn hàng sản phẩm
+      - tôi muốn hủy đơn hàng
+      - hủy đơn hàng sản phẩm
+      - tôi cần hủy đơn hàng
+      - hủy đơn hàng sản phẩm
+      - tôi muốn hủy đơn hàng
+      - hủy đơn hàng sản phẩm
+      - tôi cần hủy đơn hàng
+
+  - intent: ask_product_info
+    examples: |
+      - sản phẩm này có tính năng gì
+      - sản phẩm có tính năng gì
+      - sản phẩm này có đặc điểm gì
+      - sản phẩm có đặc điểm gì
+      - sản phẩm này có gì đặc biệt
+      - sản phẩm có gì đặc biệt
+      - sản phẩm này có ưu điểm gì
+      - sản phẩm có ưu điểm gì
+      - sản phẩm này có nhược điểm gì
+      - sản phẩm có nhược điểm gì
+      - sản phẩm này có phù hợp không
+      - sản phẩm có phù hợp không
+      - sản phẩm này có tốt không
+      - sản phẩm có tốt không
+      - sản phẩm này có bền không
+      - sản phẩm có bền không
+      - sản phẩm này có đẹp không
+      - sản phẩm có đẹp không
+      - sản phẩm này có sang không
+      - sản phẩm có sang không
+
+  - intent: ask_inventory
+    examples: |
+      - sản phẩm này còn hàng không
+      - sản phẩm có còn hàng không
+      - sản phẩm này có sẵn không
+      - sản phẩm có sẵn không
+      - sản phẩm này có tồn kho không
+      - sản phẩm có tồn kho không
+      - sản phẩm này có bán không
+      - sản phẩm có bán không
+      - sản phẩm này có còn không
+      - sản phẩm có còn không
+      - sản phẩm này có còn lại không
+      - sản phẩm có còn lại không
+      - sản phẩm này có còn số lượng không
+      - sản phẩm có còn số lượng không
+      - sản phẩm này có còn bao nhiêu
+      - sản phẩm có còn bao nhiêu
+      - sản phẩm này có còn mấy cái
+      - sản phẩm có còn mấy cái
+      - sản phẩm này có còn bao nhiêu cái
+      - sản phẩm có còn bao nhiêu cái
+
+  - intent: ask_delivery_time
+    examples: |
+      - thời gian giao hàng bao lâu
+      - giao hàng mất bao lâu
+      - bao lâu thì nhận được hàng
+      - thời gian ship bao lâu
+      - giao hàng nhanh không
+      - có giao hàng nhanh không
+      - giao hàng trong ngày không
+      - giao hàng 1 ngày không
+      - giao hàng 2 ngày không
+      - giao hàng 3 ngày không
+      - giao hàng cuối tuần không
+      - giao hàng ngày lễ không
+      - giao hàng tết không
+      - giao hàng giờ hành chính không
+      - giao hàng ngoài giờ không
+      - giao hàng sáng không
+      - giao hàng chiều không
+      - giao hàng tối không
+      - giao hàng cuối tuần không
+      - giao hàng chủ nhật không
+
+  - intent: ask_delivery_fee
+    examples: |
+      - phí giao hàng bao nhiêu
+      - ship phí bao nhiêu
+      - phí vận chuyển bao nhiêu
+      - có phí ship không
+      - ship có mất phí không
+      - giao hàng có phí không
+      - phí giao hàng có đắt không
+      - ship phí có rẻ không
+      - có miễn phí ship không
+      - ship free không
+      - giao hàng miễn phí không
+      - ship từ bao nhiêu tiền
+      - ship trên bao nhiêu free
+      - ship dưới bao nhiêu phí
+      - phí ship theo khu vực không
+      - ship nội thành bao nhiêu
+      - ship ngoại thành bao nhiêu
+      - ship tỉnh khác bao nhiêu
+      - ship xa bao nhiêu
+      - ship gần bao nhiêu
+
+  - intent: ask_delivery_area
+    examples: |
+      - giao hàng ở đâu
+      - ship đến đâu
+      - khu vực giao hàng
+      - giao hàng toàn quốc không
+      - giao hàng Hà Nội không
+      - giao hàng TP.HCM không
+      - giao hàng Đà Nẵng không
+      - giao hàng nông thôn không
+      - giao hàng miền núi không
+      - giao hàng hải đảo không
+      - giao hàng nước ngoài không
+      - giao hàng châu âu không
+      - giao hàng châu á không
+      - giao hàng châu mỹ không
+      - giao hàng châu úc không
+      - giao hàng châu phi không
+      - giao hàng trung đông không
+      - giao hàng nam mỹ không
+      - giao hàng bắc mỹ không
+      - giao hàng đông nam á không
+
+  - intent: ask_store_address
+    examples: |
+      - địa chỉ cửa hàng ở đâu
+      - shop ở đâu
+      - cửa hàng ở đâu
+      - địa chỉ showroom
+      - địa chỉ trụ sở
+      - địa chỉ văn phòng
+      - địa chỉ kho hàng
+      - địa chỉ chi nhánh
+      - địa chỉ đại lý
+      - địa chỉ phân phối
+      - địa chỉ bán lẻ
+      - địa chỉ bán buôn
+      - địa chỉ trung tâm
+      - địa chỉ plaza
+      - địa chỉ mall
+      - địa chỉ chợ
+      - địa chỉ phố
+      - địa chỉ đường
+      - địa chỉ quận
+      - địa chỉ huyện
+
+  - intent: ask_payment_method
+    examples: |
+      - có thanh toán momo vnpay cod không
+      - thanh toán bằng gì
+      - có thanh toán online không
+      - có thanh toán thẻ không
+      - có thanh toán tiền mặt không
+      - có thanh toán chuyển khoản không
+      - có thanh toán momo không
+      - có thanh toán vnpay không
+      - có thanh toán cod không
+      - có thanh toán trả góp không
+      - có thanh toán thẻ tín dụng không
+      - có thanh toán thẻ ghi nợ không
+      - có thanh toán ví điện tử không
+      - có thanh toán paypal không
+      - có thanh toán stripe không
+      - có thanh toán apple pay không
+      - có thanh toán google pay không
+      - có thanh toán samsung pay không
+      - có thanh toán zalo pay không
+      - có thanh toán airpay không
+      - có thanh toán shopeepay không
+
+  - intent: ask_working_hours
+    examples: |
+      - thời gian làm việc
+      - giờ mở cửa
+      - giờ đóng cửa
+      - làm việc mấy giờ
+      - mở cửa mấy giờ
+      - đóng cửa mấy giờ
+      - có làm việc cuối tuần không
+      - có làm việc chủ nhật không
+      - có làm việc ngày lễ không
+      - có làm việc tết không
+      - có làm việc đêm không
+      - có làm việc sáng sớm không
+      - có làm việc chiều muộn không
+      - có làm việc 24/7 không
+      - có làm việc online không
+      - có hỗ trợ ngoài giờ không
+      - có tư vấn 24/7 không
+      - có chat 24/7 không
+      - có hotline 24/7 không
+      - có email 24/7 không
+
+  - intent: ask_contact_support
+    examples: |
+      - liên hệ hỗ trợ
+      - hotline là gì
+      - số điện thoại
+      - email hỗ trợ
+      - chat hỗ trợ
+      - zalo hỗ trợ
+      - facebook hỗ trợ
+      - instagram hỗ trợ
+      - tiktok hỗ trợ
+      - youtube hỗ trợ
+      - website hỗ trợ
+      - app hỗ trợ
+      - fanpage hỗ trợ
+      - group hỗ trợ
+      - forum hỗ trợ
+      - community hỗ trợ
+      - discord hỗ trợ
+      - telegram hỗ trợ
+      - whatsapp hỗ trợ
+      - viber hỗ trợ
+
+  - intent: ask_shopping_guide
+    examples: |
+      - hướng dẫn mua hàng
+      - cách mua hàng
+      - quy trình mua hàng
+      - bước mua hàng
+      - làm sao để mua
+      - mua hàng như thế nào
+      - đặt hàng như thế nào
+      - thanh toán như thế nào
+      - nhận hàng như thế nào
+      - đổi trả như thế nào
+      - bảo hành như thế nào
+      - sử dụng như thế nào
+      - cài đặt như thế nào
+      - kích hoạt như thế nào
+      - đăng ký như thế nào
+      - tạo tài khoản như thế nào
+      - đăng nhập như thế nào
+      - quên mật khẩu như thế nào
+      - đổi mật khẩu như thế nào
+      - cập nhật thông tin như thế nào
+
+  - intent: ask_product_review
+    examples: |
+      - đánh giá sản phẩm
+      - review sản phẩm
+      - nhận xét sản phẩm
+      - bình luận sản phẩm
+      - feedback sản phẩm
+      - ý kiến khách hàng
+      - phản hồi khách hàng
+      - đánh giá từ khách hàng
+      - review từ khách hàng
+      - nhận xét từ khách hàng
+      - bình luận từ khách hàng
+      - feedback từ khách hàng
+      - ý kiến từ khách hàng
+      - phản hồi từ khách hàng
+      - đánh giá 5 sao
+      - review 5 sao
+      - nhận xét 5 sao
+      - bình luận 5 sao
+      - feedback 5 sao
+      - ý kiến 5 sao
+
+  - intent: ask_popular_watches
+    examples: |
+      - đồng hồ bán chạy
+      - tôi muốn mua các mẫu đồng hồ bán chạy
+      - tôi muốn xem các mẫu đồng hồ bán chạy
+      - đồng hồ hot
+      - đồng hồ nổi bật
+      - đồng hồ được yêu thích
+      - đồng hồ phổ biến
+      - đồng hồ trending
+      - đồng hồ bestseller
+      - đồng hồ top seller
+      - đồng hồ được mua nhiều
+      - đồng hồ được đánh giá cao
+      - đồng hồ được khuyến nghị
+      - đồng hồ được đề xuất
+      - đồng hồ được chọn nhiều
+      - đồng hồ được quan tâm
+      - đồng hồ được tìm kiếm nhiều
+      - đồng hồ được xem nhiều
+      - đồng hồ được like nhiều
+      - đồng hồ được share nhiều
+
+  - intent: search_watches
+    examples: |
+      - tôi muốn xem đồng hồ rolex
+      - tôi muốn mua đồng hồ casio
+      - tôi muốn tìm đồng hồ dior
+      - tôi muốn xem đồng hồ masala
+      - tôi muốn mua đồng hồ nam
+      - tôi muốn xem đồng hồ nữ
+      - tôi muốn tìm đồng hồ học sinh
+      - tôi muốn xem đồng hồ sinh viên
+      - tôi muốn mua đồng hồ phú
+      - tôi muốn xem đồng hồ olympia12
+      - tôi muốn tìm đồng hồ đen
+      - tôi muốn xem đồng hồ trắng
+      - tôi muốn mua đồng hồ vàng
+      - tôi muốn xem đồng hồ bạc
+      - tôi muốn tìm đồng hồ xanh
+      - tôi muốn xem đồng hồ titan
+      - tôi muốn mua đồng hồ titanium
+      - tôi muốn tìm đồng hồ sắt
+      - tôi muốn xem đồng hồ kim cương
+      - tôi muốn mua đồng hồ máy pin
+      - tôi muốn xem đồng hồ máy cơ
+      - tôi muốn tìm đồng hồ máy bền
+      - tôi muốn xem đồng hồ automatic
+      - tôi muốn mua đồng hồ quartz
+      - tôi muốn xem đồng hồ thương hiệu DIOR
+      - tôi muốn xem đồng hồ thương hiệu CASIO
+      - tôi muốn xem đồng hồ thương hiệu ROLEX
+      - tôi muốn xem đồng hồ danh mục PHÚ
+      - tôi muốn xem đồng hồ danh mục THỂ THAO
+      - tôi muốn xem đồng hồ màu đen
+      - tôi muốn xem đồng hồ màu trắng
+      - tôi muốn xem đồng hồ màu vàng
+      - tôi muốn xem đồng hồ loại máy máy pin
+      - tôi muốn xem đồng hồ loại máy máy cơ
+      - tôi muốn xem đồng hồ dây da
+      - tôi muốn xem đồng hồ dây kim loại
+      - tôi còn có 250k bên bạn có đồng hồ nào giá đó không
+      - tôi còn có 250 nghìn bên bạn có đồng hồ nào giá đó không
+      - tôi còn có 250000 bên bạn có đồng hồ nào giá đó không
+      - tôi còn có 250 nghìn đồng bên bạn có đồng hồ nào giá đó không
+      - tôi còn có 250k tư vấn cho tôi đồng hồ đi tiệc
+      - tôi còn có 1 triệu tư vấn cho tôi đồng hồ đi tiệc
+      - tôi còn có 1 triệu đồng tư vấn cho tôi đồng hồ đi tiệc
+      - tôi còn có 1tr tư vấn cho tôi đồng hồ đi tiệc
+      - tôi muốn mua sản phẩm trong khoảng từ 100 đến 500
+      - tôi muốn mua sản phẩm trong khoảng từ 100 đến 500 nghìn
+      - tôi muốn mua sản phẩm trong khoảng từ 100 đến 500 nghìn đồng
+      - tôi muốn mua sản phẩm trong khoảng từ 100k đến 500k
+      - tôi muốn mua sản phẩm trong khoảng từ 100.000 đến 500.000
+      - tôi muốn mua sản phẩm trong khoảng từ 1 triệu đến 3 triệu
+      - tôi muốn mua sản phẩm trong khoảng từ 1tr đến 3tr
+      - tôi muốn mua sản phẩm trong khoảng từ 1 triệu đồng đến 3 triệu đồng
+      - tôi muốn mua đồng hồ giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ giá từ 500 nghìn đến 1 triệu
+      - tôi muốn mua đồng hồ giá từ 500.000 đến 1.000.000
+      - tôi muốn mua đồng hồ giá dưới 1 triệu
+      - tôi muốn mua đồng hồ giá dưới 1 triệu đồng
+      - tôi muốn mua đồng hồ giá dưới 1tr
+      - tôi muốn mua đồng hồ giá dưới 500k
+      - tôi muốn mua đồng hồ giá dưới 500 nghìn
+      - tôi muốn mua đồng hồ giá dưới 500.000
+      - tôi muốn mua đồng hồ giá trên 5 triệu
+      - tôi muốn mua đồng hồ giá trên 5 triệu đồng
+      - tôi muốn mua đồng hồ giá trên 5tr
+      - tôi muốn mua đồng hồ giá từ 2 triệu trở lên
+      - tôi muốn mua đồng hồ giá từ 2tr trở lên
+      - tôi muốn mua đồng hồ giá tầm 1 triệu
+      - tôi muốn mua đồng hồ giá tầm 1tr
+      - tôi muốn mua đồng hồ giá khoảng 2 triệu
+      - tôi muốn mua đồng hồ giá khoảng 2tr
+      - tôi muốn mua đồng hồ giá cỡ 500k
+      - tôi muốn mua đồng hồ giá cỡ 500 nghìn
+      - tôi muốn mua đồng hồ giá từ 300k đến 800k
+      - tôi muốn mua đồng hồ giá từ 300 nghìn đến 800 nghìn
+      - tôi muốn mua đồng hồ giá từ 300.000 đến 800.000
+      - tôi muốn mua đồng hồ giá từ 2 triệu đến 5 triệu
+      - tôi muốn mua đồng hồ giá từ 2tr đến 5tr
+      - tôi muốn mua đồng hồ giá từ 2 triệu đồng đến 5 triệu đồng
+      - tôi muốn mua đồng hồ giá từ 1.5 triệu đến 3.5 triệu
+      - tôi muốn mua đồng hồ giá từ 1.5tr đến 3.5tr
+      - tôi muốn mua đồng hồ giá từ 1 triệu 500 đến 3 triệu 500
+      - tôi muốn mua đồng hồ giá từ 1tr500 đến 3tr500
+      - tôi muốn mua đồng hồ giá từ 100k đến 200k
+      - tôi muốn mua đồng hồ giá từ 100 nghìn đến 200 nghìn
+      - tôi muốn mua đồng hồ giá từ 100.000 đến 200.000
+      - 250 mua đồng hồ nào
+      - 250 mua được đồng hồ nào
+      - 250k mua được mẫu nào
+      - 500k mua được mẫu nào
+      - 500 mua được đồng hồ nào
+      - 1 triệu mua được đồng hồ nào
+      - 1tr mua được đồng hồ nào
+      - 300k mua được gì
+      - 400k mua được gì
+      - 600k mua được gì
+      - 800k mua được gì
+      - 1.5 triệu mua được gì
+      - 2 triệu mua được gì
+      - có đồng hồ nào giá rẻ không
+      - có đồng hồ nào rẻ không
+      - có đồng hồ nào giá tốt không
+      - có đồng hồ nào hợp lý không
+      - có đồng hồ nào giá bình dân không
+      - có đồng hồ nào giá phải chăng không
+      - có đồng hồ nào giá vừa túi tiền không
+      - đồng hồ nào giá rẻ
+      - đồng hồ nào rẻ nhất
+      - đồng hồ nào giá tốt nhất
+      - đồng hồ nào giá hợp lý nhất
+      - tư vấn đồng hồ giá rẻ
+      - gợi ý đồng hồ giá rẻ
+      - tư vấn đồng hồ giá tốt
+      - gợi ý đồng hồ giá tốt
+      - tư vấn đồng hồ hợp lý
+      - gợi ý đồng hồ hợp lý
+      - đồng hồ giá tốt
+      - đồng hồ giá rẻ
+      - đồng hồ hợp lý
+      - đồng hồ giá phải chăng
+      - đồng hồ giá bình dân
+      - đồng hồ nào đáng mua nhất
+      - đồng hồ nào nên mua
+      - đồng hồ nào tốt nhất
+      - đồng hồ nào hot nhất
+      - đồng hồ nào bán chạy nhất
+      - đồng hồ nào được yêu thích nhất
+      - tôi muốn mua đồng hồ 4 sao
+      - tôi muốn mua đồng hồ từ 4 sao trở lên
+      - tôi muốn mua đồng hồ đánh giá từ 4 sao
+      - tôi muốn mua đồng hồ rating từ 4
+      - tôi muốn mua đồng hồ 5 sao
+      - tôi muốn mua đồng hồ từ 5 sao trở lên
+      - tôi muốn mua đồng hồ đánh giá từ 5 sao
+      - tôi muốn mua đồng hồ rating từ 5
+      - tôi muốn mua đồng hồ 3 sao trở lên
+      - tôi muốn mua đồng hồ từ 3 sao trở lên
+      - tôi muốn mua đồng hồ đánh giá từ 3 sao trở lên
+      - tôi muốn mua đồng hồ rating từ 3 trở lên
+      - tôi muốn mua đồng hồ 4 sao trở lên
+      - tôi muốn mua đồng hồ từ 4 sao
+      - tôi muốn mua đồng hồ đánh giá 4 sao
+      - tôi muốn mua đồng hồ rating 4
+      - đồng hồ 4 sao
+      - đồng hồ từ 4 sao trở lên
+      - đồng hồ đánh giá từ 4 sao
+      - đồng hồ rating từ 4
+      - đồng hồ 5 sao
+      - đồng hồ từ 5 sao trở lên
+      - đồng hồ đánh giá từ 5 sao
+      - đồng hồ rating từ 5
+      - đồng hồ 3 sao trở lên
+      - đồng hồ từ 3 sao trở lên
+      - đồng hồ đánh giá từ 3 sao trở lên
+      - đồng hồ rating từ 3 trở lên
+      - tôi muốn mua đồng hồ nam 4 sao
+      - tôi muốn mua đồng hồ nữ từ 4 sao trở lên
+      - tôi muốn mua đồng hồ giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ casio từ 4 sao trở lên
+      - tôi muốn mua đồng hồ màu đen 5 sao
+      - tôi muốn mua đồng hồ máy pin từ 4 sao trở lên
+      - tôi muốn mua đồng hồ casio nam giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ rolex từ 5 triệu đến 15 triệu
+      - tôi muốn mua đồng hồ nữ màu vàng giá dưới 2 triệu
+      - tôi muốn mua đồng hồ nam màu đen từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ casio nam màu đen giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ rolex nam từ 10 triệu trở lên
+      - tôi muốn mua đồng hồ nữ màu bạc giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ nam máy pin giá dưới 1 triệu
+      - tôi muốn mua đồng hồ nữ máy cơ giá từ 2 triệu đến 5 triệu
+      - tôi muốn mua đồng hồ dây da nam giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ dây kim loại nữ giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ casio nam màu đen máy pin giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ rolex nam màu vàng máy cơ từ 10 triệu trở lên
+      - tôi muốn mua đồng hồ nữ màu bạc dây da giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ nam máy pin dây kim loại giá dưới 1 triệu
+      - tôi muốn mua đồng hồ casio nam giá từ 500k đến 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ nữ giá từ 1 triệu đến 3 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ nam màu đen giá từ 500k đến 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ casio nam màu đen giá từ 500k đến 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ rolex nam từ 10 triệu trở lên rating từ 5 sao
+      - tôi muốn mua đồng hồ nữ màu bạc giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ nam máy pin giá dưới 1 triệu rating từ 3 sao trở lên
+      - tôi muốn mua đồng hồ nữ máy cơ giá từ 2 triệu đến 5 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ dây da nam giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ dây kim loại nữ giá từ 500k đến 1 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ casio nam màu đen máy pin giá từ 500k đến 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ rolex nam màu vàng máy cơ từ 10 triệu trở lên rating từ 5 sao
+      - tôi muốn mua đồng hồ nữ màu bạc dây da giá từ 1 triệu đến 3 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ nam máy pin dây kim loại giá dưới 1 triệu rating từ 3 sao trở lên
+      - tôi muốn mua đồng hồ casio nam màu đen máy pin giá từ 500k đến 1 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ thể thao nam màu đen giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ phú nam màu vàng giá từ 2 triệu đến 5 triệu
+      - tôi muốn mua đồng hồ thể thao nam màu đen giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ phú nam màu vàng giá từ 2 triệu đến 5 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ casio thể thao nam màu đen giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ casio thể thao nam màu đen giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ rolex phú nam màu vàng từ 10 triệu trở lên rating từ 5 sao
+      - tôi muốn mua đồng hồ nữ màu hồng giá dưới 1 triệu
+      - tôi muốn mua đồng hồ nữ màu hồng giá dưới 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ nam màu xanh giá từ 500k đến 1 triệu rating từ 3 sao trở lên
+      - tôi muốn mua đồng hồ nữ màu trắng giá từ 1 triệu đến 2 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ casio nữ màu hồng giá dưới 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ máy pin nam màu đen giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ máy cơ nữ màu bạc giá từ 2 triệu đến 5 triệu
+      - tôi muốn mua đồng hồ máy pin nam màu đen giá từ 500k đến 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ máy cơ nữ màu bạc giá từ 2 triệu đến 5 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ dây da nam màu đen giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ dây kim loại nữ màu bạc giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ dây da nam màu đen giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ dây kim loại nữ màu bạc giá từ 500k đến 1 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ casio nam màu đen máy pin dây da giá từ 500k đến 1 triệu
+      - tôi muốn mua đồng hồ rolex nam màu vàng máy cơ dây kim loại từ 10 triệu trở lên
+      - tôi muốn mua đồng hồ casio nam màu đen máy pin dây da giá từ 500k đến 1 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ rolex nam màu vàng máy cơ dây kim loại từ 10 triệu trở lên rating từ 5 sao
+      - tôi muốn mua đồng hồ nữ màu bạc máy pin dây da giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ nữ màu bạc máy pin dây da giá từ 1 triệu đến 3 triệu rating từ 4 sao trở lên
+      - tôi muốn mua đồng hồ nam máy pin dây kim loại màu đen giá dưới 1 triệu
+      - tôi muốn mua đồng hồ nam máy pin dây kim loại màu đen giá dưới 1 triệu rating từ 3 sao trở lên
+      - tôi muốn mua đồng hồ casio thể thao nam màu đen máy pin giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ casio thể thao nam màu đen máy pin giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ rolex phú nam màu vàng máy cơ từ 10 triệu trở lên rating từ 5 sao
+      - tôi muốn mua đồng hồ casio thể thao nam màu đen máy pin dây da giá từ 1 triệu đến 3 triệu
+      - tôi muốn mua đồng hồ casio thể thao nam màu đen máy pin dây da giá từ 1 triệu đến 3 triệu rating từ 4 sao
+      - tôi muốn mua đồng hồ rolex phú nam màu vàng máy cơ dây kim loại từ 10 triệu trở lên rating từ 5 sao
+
+  - intent: search_watches
+    examples: |
+      - mình cần [đồng hồ](product) phong cách [cổ điển](style) [nam](gender) màu [gold](color)
+      - cho tôi mẫu [đồng hồ](product) [nam](gender) màu [vàng gold](color) dây [kim loại](strap_material) máy [quartz](movement_type)
+      - tìm [đồng hồ](product) [nữ](gender) màu [bạc](color) thương hiệu [casio](brand)
+      - gợi ý [đồng hồ](product) [classic](style) [nam](gender) màu [đen](color) dây [da](strap_material)
+      - cần [đồng hồ](product) [vintage](style) [nam](gender) màu [rose gold](color) máy [automatic](movement_type)
+
+  - lookup: color
+    examples: |
+      - đen
+      - trắng
+      - vàng
+      - vàng gold
+      - gold
+      - rose gold
+      - bạc
+      - xanh
+      - đỏ
+      - hồng
+      - tím
+      - cam
+      - nâu
+      - xám
+
+  - lookup: gender
+    examples: |
+      - nam
+      - nữ
+      - male
+      - female
+
+  - lookup: movement_type
+    examples: |
+      - automatic
+      - quartz
+      - máy cơ
+      - máy pin
+
+  - lookup: strap_material
+    examples: |
+      - kim loại
+      - thép
+      - da
+      - cao su
+      - silicon
+
+  - lookup: style
+    examples: |
+      - cổ điển
+      - classic
+      - vintage
+      - retro
+      - thể thao
+      - hiện đại
+
+  - synonym: vàng
+    examples: |
+      - gold
+      - vàng gold
+      - màu gold
+      - mạ vàng
+
+  - synonym: máy pin
+    examples: |
+      - quartz
+
+  - synonym: máy cơ
+    examples: |
+      - automatic
+
+  - intent: filter_products
+    examples: |
+      - filter products by brand
+      - filter by category
+      - filter by color
+      - filter by movement type
+      - filter by gender
+      - filter by rating
+
+  - intent: view_order_detail
+    examples: |
+      - xem chi tiết đơn hàng
+      - chi tiết đơn hàng
+      - thông tin đơn hàng
+      - xem đơn hàng
+      - đơn hàng chi tiết
+      - thông tin chi tiết đơn hàng
+      - xem thông tin đơn hàng
+      - đơn hàng thông tin
+      - chi tiết đơn
+      - xem chi tiết đơn
+      - thông tin đơn
+      - đơn thông tin
+      - xem đơn
+      - đơn xem
+      - chi tiết
+      - thông tin
+      - xem
+      - đơn hàng
+      - đơn
+      - hàng
+
+  - intent: track_order
+    examples: |
+      - theo dõi đơn hàng
+      - theo dõi đơn
+      - theo dõi hàng
+      - theo dõi
+      - track đơn hàng
+      - track đơn
+      - track hàng
+      - track
+      - theo dõi trạng thái đơn hàng
+      - theo dõi trạng thái đơn
+      - theo dõi trạng thái hàng
+      - theo dõi trạng thái
+      - trạng thái đơn hàng
+      - trạng thái đơn
+      - trạng thái hàng
+      - trạng thái
+      - đơn hàng ở đâu
+      - đơn hàng đến đâu
+      - đơn hàng giao chưa
+      - đơn hàng ship chưa
+      - đơn hàng vận chuyển
+      - đơn hàng giao hàng
+      - đơn hàng nhận hàng
+      - đơn hàng lấy hàng
+      - đơn hàng mua hàng
+      - đơn hàng bán hàng
+      - đơn hàng còn hàng
+      - đơn hàng hết hàng
+      - đơn hàng đủ hàng
+      - đơn hàng thiếu hàng
+      - đơn hàng đúng hàng
+      - đơn hàng sai hàng
+
+  - intent: filter_orders_by_status
+    examples: |
+      - xem đơn hàng trạng thái
+      - đơn hàng trạng thái
+      - trạng thái đơn hàng
+      - đơn hàng theo trạng thái
+      - lọc đơn hàng theo trạng thái
+      - filter đơn hàng theo trạng thái
+      - đơn hàng chờ xác nhận
+      - đơn hàng chờ thanh toán
+      - đơn hàng đã thanh toán
+      - đơn hàng đang chuẩn bị hàng
+      - đơn hàng hoàn tất
+      - đơn hàng đã hủy
+      - đơn hàng pending
+      - đơn hàng pendingpayment
+      - đơn hàng paid
+      - đơn hàng preparing
+      - đơn hàng complete
+      - đơn hàng cancel
+      - đơn hàng màu vàng
+      - đơn hàng màu cam
+      - đơn hàng màu xanh lá
+      - đơn hàng màu xanh dương
+      - đơn hàng màu đỏ
+      - đơn hàng trạng thái chờ xác nhận
+      - đơn hàng trạng thái chờ thanh toán
+      - đơn hàng trạng thái đã thanh toán
+      - đơn hàng trạng thái đang chuẩn bị hàng
+      - đơn hàng trạng thái hoàn tất
+      - đơn hàng trạng thái đã hủy
