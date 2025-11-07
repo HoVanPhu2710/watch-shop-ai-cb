@@ -1,5 +1,6 @@
 services:
   # Rasa Server (Main API)
+  # Note: Python version is specified in runtime.txt (python-3.10)
   - type: web
     name: rasa-server
     env: python
@@ -10,6 +11,8 @@ services:
         value: 5005
       - key: API_URL
         sync: false
+      - key: PYTHON_VERSION
+        value: 3.10
     healthCheckPath: /webhooks/rest/webhook
 
   # Rasa Action Server
@@ -23,4 +26,6 @@ services:
         value: 5055
       - key: API_URL
         sync: false
+      - key: PYTHON_VERSION
+        value: 3.10
 
