@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Rasa Chatbot</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: 100%;
+        max-width: 800px;
+        padding: 30px;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      .subtitle {
+        color: #666;
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .server-info {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .server-info label {
+        font-weight: bold;
+        color: #555;
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .server-info input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .chat-container {
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        height: 400px;
+        overflow-y: auto;
+        padding: 20px;
+        margin-bottom: 20px;
+        background: #fafafa;
+      }
+
+      .message {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .message.user {
+        justify-content: flex-end;
+      }
+
+      .message.bot {
+        justify-content: flex-start;
+      }
+
+      .message-content {
+        max-width: 70%;
+        padding: 12px 16px;
+        border-radius: 18px;
+        word-wrap: break-word;
+      }
+
+      .message.user .message-content {
+        background: #667eea;
+        color: white;
+        border-bottom-right-radius: 4px;
+      }
+
+      .message.bot .message-content {
+        background: #e0e0e0;
+        color: #333;
+        border-bottom-left-radius: 4px;
+      }
+
+      .message-time {
+        font-size: 11px;
+        color: #999;
+        margin-top: 5px;
+        padding: 0 5px;
+      }
+
+      .input-container {
+        display: flex;
+        gap: 10px;
+      }
+
+      #messageInput {
+        flex: 1;
+        padding: 12px 16px;
+        border: 2px solid #ddd;
+        border-radius: 25px;
+        font-size: 16px;
+        outline: none;
+        transition: border-color 0.3s;
+      }
+
+      #messageInput:focus {
+        border-color: #667eea;
+      }
+
+      #sendButton {
+        padding: 12px 30px;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+        font-weight: bold;
+      }
+
+      #sendButton:hover {
+        background: #5568d3;
+      }
+
+      #sendButton:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+
+      .status {
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      .status.success {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status.error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .status.loading {
+        background: #fff3cd;
+        color: #856404;
+      }
+
+      .quick-buttons {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
+
+      .quick-button {
+        padding: 8px 16px;
+        background: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s;
+      }
+
+      .quick-button:hover {
+        background: #667eea;
+        color: white;
+        border-color: #667eea;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🤖 Test Rasa Chatbot</h1>
+      <p class="subtitle">Kiểm tra kết nối với Rasa Server</p>
+
+      <div class="server-info">
+        <label>Rasa Server URL:</label>
+        <input
+          type="text"
+          id="serverUrl"
+          value="https://rasa-server-8hxj.onrender.com"
+          placeholder="Nhập URL của Rasa server"
+        />
+      </div>
+
+      <div class="quick-buttons">
+        <button class="quick-button" onclick="sendQuickMessage('xin chào')">
+          Xin chào
+        </button>
+        <button class="quick-button" onclick="sendQuickMessage('bạn là ai')">
+          Bạn là ai?
+        </button>
+        <button
+          class="quick-button"
+          onclick="sendQuickMessage('giới thiệu sản phẩm')"
+        >
+          Giới thiệu sản phẩm
+        </button>
+        <button class="quick-button" onclick="sendQuickMessage('giá cả')">
+          Giá cả
+        </button>
+      </div>
+
+      <div class="chat-container" id="chatContainer">
+        <div class="message bot">
+          <div>
+            <div class="message-content">
+              Chào bạn! Tôi là chatbot Rasa. Hãy gửi tin nhắn để bắt đầu trò
+              chuyện! 👋
+            </div>
+            <div class="message-time">Hệ thống</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-container">
+        <input
+          type="text"
+          id="messageInput"
+          placeholder="Nhập tin nhắn của bạn..."
+          onkeypress="handleKeyPress(event)"
+        />
+        <button id="sendButton" onclick="sendMessage()">Gửi</button>
+      </div>
+
+      <div id="status" class="status" style="display: none"></div>
+    </div>
+
+    <script>
+      const serverUrlInput = document.getElementById("serverUrl");
+      const messageInput = document.getElementById("messageInput");
+      const sendButton = document.getElementById("sendButton");
+      const chatContainer = document.getElementById("chatContainer");
+      const statusDiv = document.getElementById("status");
+
+      function getServerUrl() {
+        return (
+          serverUrlInput.value.trim() || "https://rasa-server-8hxj.onrender.com"
+        );
+      }
+
+      function showStatus(message, type) {
+        statusDiv.textContent = message;
+        statusDiv.className = `status ${type}`;
+        statusDiv.style.display = "block";
+        setTimeout(() => {
+          statusDiv.style.display = "none";
+        }, 3000);
+      }
+
+      function addMessage(content, isUser) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${isUser ? "user" : "bot"}`;
+
+        const time = new Date().toLocaleTimeString("vi-VN");
+
+        messageDiv.innerHTML = `
+                <div>
+                    <div class="message-content">${content}</div>
+                    <div class="message-time">${
+                      isUser ? "Bạn" : "Bot"
+                    } - ${time}</div>
+                </div>
+            `;
+
+        chatContainer.appendChild(messageDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      async function sendMessage(message = null) {
+        const messageText = message || messageInput.value.trim();
+
+        if (!messageText) {
+          showStatus("Vui lòng nhập tin nhắn!", "error");
+          return;
+        }
+
+        // Disable input while sending
+        sendButton.disabled = true;
+        messageInput.disabled = true;
+
+        // Add user message to chat
+        addMessage(messageText, true);
+
+        // Clear input
+        if (!message) {
+          messageInput.value = "";
+        }
+
+        // Show loading status
+        showStatus("Đang gửi tin nhắn...", "loading");
+
+        try {
+          const serverUrl = getServerUrl();
+          const webhookUrl = `${serverUrl}/webhooks/rest/webhook`;
+
+          const response = await fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: messageText,
+              sender: "user",
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          // Show success status
+          showStatus("Tin nhắn đã được gửi thành công!", "success");
+
+          // Add bot response(s) to chat
+          if (data && data.length > 0) {
+            data.forEach((item) => {
+              if (item.text) {
+                addMessage(item.text, false);
+              }
+            });
+          } else {
+            addMessage("Bot không có phản hồi.", false);
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          showStatus(`Lỗi: ${error.message}`, "error");
+          addMessage(`❌ Lỗi kết nối: ${error.message}`, false);
+        } finally {
+          // Re-enable input
+          sendButton.disabled = false;
+          messageInput.disabled = false;
+          messageInput.focus();
+        }
+      }
+
+      function sendQuickMessage(message) {
+        messageInput.value = message;
+        sendMessage(message);
+      }
+
+      function handleKeyPress(event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      }
+
+      // Test server connection on load
+      window.addEventListener("load", async () => {
+        try {
+          const serverUrl = getServerUrl();
+          const testUrl = `${serverUrl}/status`;
+          const response = await fetch(testUrl);
+          if (response.ok) {
+            showStatus("✅ Kết nối thành công với Rasa server!", "success");
+          }
+        } catch (error) {
+          showStatus(
+            "⚠️ Không thể kết nối với server. Vui lòng kiểm tra URL.",
+            "error"
+          );
+        }
+      });
+    </script>
+  </body>
+</html>
