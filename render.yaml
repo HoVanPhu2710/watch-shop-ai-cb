@@ -10,7 +10,7 @@ services:
       - key: PORT
         value: 5005
       - key: ACTION_SERVER_URL
-        value: https://rasa-actions-8hxj.onrender.com
+        value: https://rasa-actions-ik5j.onrender.com
       - key: API_URL
         value: https://watch-shop-uzr4.onrender.com
       - key: PYTHON_VERSION
