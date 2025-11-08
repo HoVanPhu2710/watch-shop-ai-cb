@@ -12,8 +12,8 @@ import os
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-# Get API URL from environment variable, default to localhost for local development
-API_BASE_URL = os.getenv("API_URL", "http://localhost:8080")
+# Get API URL from environment variable, default to backend API for production
+API_BASE_URL = os.getenv("API_URL", "https://watch-shop-uzr4.onrender.com")
 
 
 class ActionShowBrands(Action):
