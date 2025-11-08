@@ -1,7 +1,7 @@
 # Rasa specific
 .rasa/
-models/
-*.tar.gz
+# models/  # Temporarily uncommented to commit model for Render deployment
+# *.tar.gz  # Temporarily uncommented to commit model for Render deployment
 data/test_stories.yml
 data/test_nlu.yml
 

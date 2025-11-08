@@ -4,7 +4,7 @@ services:
   - type: web
     name: rasa-server
     env: python
-    buildCommand: pip install --upgrade pip && pip install "setuptools<70" wheel && pip install -r requirements.txt && rasa train
+    buildCommand: pip install --upgrade pip && pip install "setuptools<70" wheel && pip install -r requirements.txt
     startCommand: rasa run --enable-api --cors "*" --port $PORT
     envVars:
       - key: PORT
