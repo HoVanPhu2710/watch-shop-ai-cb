@@ -137,4 +137,4 @@ Thumbs.db
 
 # API keys and sensitive data
 credentials.yml
-endpoints.yml
+# endpoints.yml  # Uncommented - needed for deployment
