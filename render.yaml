@@ -9,6 +9,8 @@ services:
     envVars:
       - key: PORT
         value: 5005
+      - key: ACTION_SERVER_URL
+        value: https://rasa-actions-8hxj.onrender.com
       - key: API_URL
         value: https://watch-shop-uzr4.onrender.com
       - key: PYTHON_VERSION
