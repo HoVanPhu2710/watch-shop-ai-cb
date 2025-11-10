@@ -301,8 +301,8 @@ class ActionShowPopularWatches(Action):
             response.raise_for_status()
             
             data = response.json()
-            # API provides recommendations in data.recommendations
-            recommendations = data.get("data", {}).get("recommendations", [])
+            # API provides recommendations in data.data.recommendations (nested structure)
+            recommendations = data.get("data", {}).get("data", {}).get("recommendations", [])
             
             if not recommendations:
                 dispatcher.utter_message(text="Hiện tại chưa có mẫu đồng hồ nổi bật nào.")
@@ -1000,7 +1000,7 @@ class ActionSearchProducts(Action):
                         )
                     rec_resp.raise_for_status()
                     rec_data = rec_resp.json()
-                    recs = rec_data.get("data", {}).get("recommendations", [])
+                    recs = rec_data.get("data", {}).get("data", {}).get("recommendations", [])
                     cards: List[Dict[str, Any]] = []
                     for rec in recs:
                         cards.append({
@@ -1099,7 +1099,7 @@ class ActionSearchProducts(Action):
                             )
                         rec_resp.raise_for_status()
                         rec_data = rec_resp.json()
-                        recs = rec_data.get("data", {}).get("recommendations", [])
+                        recs = rec_data.get("data", {}).get("data", {}).get("recommendations", [])
                         cards: List[Dict[str, Any]] = []
                         for rec in recs:
                             cards.append({
@@ -1378,7 +1378,7 @@ class ActionFilterProducts(Action):
                         )
                     rec_resp.raise_for_status()
                     rec_data = rec_resp.json()
-                    recs = rec_data.get("data", {}).get("recommendations", [])
+                    recs = rec_data.get("data", {}).get("data", {}).get("recommendations", [])
                     cards: List[Dict[str, Any]] = []
                     for rec in recs:
                         cards.append({
