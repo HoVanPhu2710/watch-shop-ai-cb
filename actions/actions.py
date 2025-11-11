@@ -311,30 +311,49 @@ class ActionShowPopularWatches(Action):
             # Build cards payload for FE
             cards: List[Dict[str, Any]] = []
             for rec in recommendations:
+                # Normalize gender value
+                gender_val = rec.get("gender") or rec.get("gender_target")
+                if gender_val in ("M", "F"):
+                    gender_val = "0" if gender_val == "M" else "1"
+                # Normalize slider list
+                slider_raw = rec.get("slider")
+                if isinstance(slider_raw, str):
+                    slider_list = [s.strip() for s in slider_raw.split(",") if s.strip()]
+                elif isinstance(slider_raw, list):
+                    slider_list = slider_raw
+                else:
+                    slider_list = rec.get("images", [])
+                # Thumbnail fallback
+                thumbnail = rec.get("thumbnail") or (rec.get("images", [None])[0] if rec.get("images") else None)
+                # Movement type name
+                movement_type_name = (rec.get("movement_type") or {}).get("name") or ", ".join(rec.get("movement_type_tags", []))
+                # Case material
+                case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
+
                 cards.append({
                     "id": rec.get("watch_id"),
                     "code": f"REC-{rec.get('watch_id')}",
                     "name": rec.get("name"),
                     "description": rec.get("description"),
-                    "model": rec.get("name"),  # Use name as model for recommendations
-                    "caseMaterial": ", ".join(rec.get("material_tags", [])),
-                    "caseSize": None,  # Not available in recommendations
-                    "strapSize": None,  # Not available in recommendations
-                    "gender": rec.get("gender_target"),
-                    "waterResistance": None,  # Not available in recommendations
-                    "releaseDate": None,  # Not available in recommendations
+                    "model": rec.get("model") or rec.get("name"),
+                    "caseMaterial": case_material,
+                    "caseSize": rec.get("case_size"),
+                    "strapSize": rec.get("strap_size"),
+                    "gender": gender_val,
+                    "waterResistance": rec.get("water_resistance"),
+                    "releaseDate": rec.get("release_date"),
                     "sold": rec.get("sold"),
                     "basePrice": rec.get("base_price"),
                     "rating": rec.get("rating"),
-                    "status": True,  # Assume active for recommendations
-                    "thumbnail": rec.get("images", [None])[0] if rec.get("images") else None,
-                    "slider": rec.get("images", []),
-                    "brandId": rec.get("brand", {}).get("id"),
-                    "brandName": rec.get("brand", {}).get("name"),
-                    "categoryId": rec.get("category", {}).get("id"),
-                    "categoryName": rec.get("category", {}).get("name"),
-                    "movementTypeId": None,  # Not directly available
-                    "movementTypeName": ", ".join(rec.get("movement_type_tags", [])),
+                    "status": rec.get("status", True),
+                    "thumbnail": thumbnail,
+                    "slider": slider_list,
+                    "brandId": (rec.get("brand", {}) or {}).get("id"),
+                    "brandName": (rec.get("brand", {}) or {}).get("name"),
+                    "categoryId": (rec.get("category", {}) or {}).get("id"),
+                    "categoryName": (rec.get("category", {}) or {}).get("name"),
+                    "movementTypeId": None,
+                    "movementTypeName": movement_type_name,
                     "colorTags": rec.get("color_tags", []),
                     "styleTags": rec.get("style_tags", []),
                     "priceTier": rec.get("price_tier"),
@@ -1003,24 +1022,41 @@ class ActionSearchProducts(Action):
                     recs = rec_data.get("data", {}).get("data", {}).get("recommendations", [])
                     cards: List[Dict[str, Any]] = []
                     for rec in recs:
+                        gender_val = rec.get("gender") or rec.get("gender_target")
+                        if gender_val in ("M", "F"):
+                            gender_val = "0" if gender_val == "M" else "1"
+                        slider_raw = rec.get("slider")
+                        if isinstance(slider_raw, str):
+                            slider_list = [s.strip() for s in slider_raw.split(",") if s.strip()]
+                        elif isinstance(slider_raw, list):
+                            slider_list = slider_raw
+                        else:
+                            slider_list = rec.get("images", [])
+                        thumbnail = rec.get("thumbnail") or (rec.get("images", [None])[0] if rec.get("images") else None)
+                        movement_type_name = (rec.get("movement_type") or {}).get("name") or ", ".join(rec.get("movement_type_tags", []))
+                        case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
                         cards.append({
                             "id": rec.get("watch_id"),
                             "code": f"REC-{rec.get('watch_id')}",
                             "name": rec.get("name"),
                             "description": rec.get("description"),
-                            "model": rec.get("name"),
-                            "caseMaterial": ", ".join(rec.get("material_tags", [])),
-                            "gender": rec.get("gender_target"),
+                            "model": rec.get("model") or rec.get("name"),
+                            "caseMaterial": case_material,
+                            "caseSize": rec.get("case_size"),
+                            "strapSize": rec.get("strap_size"),
+                            "gender": gender_val,
+                            "waterResistance": rec.get("water_resistance"),
+                            "releaseDate": rec.get("release_date"),
                             "sold": rec.get("sold"),
                             "basePrice": rec.get("base_price"),
                             "rating": rec.get("rating"),
-                            "thumbnail": rec.get("images", [None])[0] if rec.get("images") else None,
-                            "slider": rec.get("images", []),
-                            "brandId": rec.get("brand", {}).get("id"),
-                            "brandName": rec.get("brand", {}).get("name"),
-                            "categoryId": rec.get("category", {}).get("id"),
-                            "categoryName": rec.get("category", {}).get("name"),
-                            "movementTypeName": ", ".join(rec.get("movement_type_tags", [])),
+                            "thumbnail": thumbnail,
+                            "slider": slider_list,
+                            "brandId": (rec.get("brand", {}) or {}).get("id"),
+                            "brandName": (rec.get("brand", {}) or {}).get("name"),
+                            "categoryId": (rec.get("category", {}) or {}).get("id"),
+                            "categoryName": (rec.get("category", {}) or {}).get("name"),
+                            "movementTypeName": movement_type_name,
                             "colorTags": rec.get("color_tags", []),
                             "styleTags": rec.get("style_tags", []),
                             "isAiRecommended": rec.get("is_ai_recommended"),
@@ -1102,24 +1138,41 @@ class ActionSearchProducts(Action):
                         recs = rec_data.get("data", {}).get("data", {}).get("recommendations", [])
                         cards: List[Dict[str, Any]] = []
                         for rec in recs:
+                            gender_val = rec.get("gender") or rec.get("gender_target")
+                            if gender_val in ("M", "F"):
+                                gender_val = "0" if gender_val == "M" else "1"
+                            slider_raw = rec.get("slider")
+                            if isinstance(slider_raw, str):
+                                slider_list = [s.strip() for s in slider_raw.split(",") if s.strip()]
+                            elif isinstance(slider_raw, list):
+                                slider_list = slider_raw
+                            else:
+                                slider_list = rec.get("images", [])
+                            thumbnail = rec.get("thumbnail") or (rec.get("images", [None])[0] if rec.get("images") else None)
+                            movement_type_name = (rec.get("movement_type") or {}).get("name") or ", ".join(rec.get("movement_type_tags", []))
+                            case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
                             cards.append({
                                 "id": rec.get("watch_id"),
                                 "code": f"REC-{rec.get('watch_id')}",
                                 "name": rec.get("name"),
                                 "description": rec.get("description"),
-                                "model": rec.get("name"),
-                                "caseMaterial": ", ".join(rec.get("material_tags", [])),
-                                "gender": rec.get("gender_target"),
+                                "model": rec.get("model") or rec.get("name"),
+                                "caseMaterial": case_material,
+                                "caseSize": rec.get("case_size"),
+                                "strapSize": rec.get("strap_size"),
+                                "gender": gender_val,
+                                "waterResistance": rec.get("water_resistance"),
+                                "releaseDate": rec.get("release_date"),
                                 "sold": rec.get("sold"),
                                 "basePrice": rec.get("base_price"),
                                 "rating": rec.get("rating"),
-                                "thumbnail": rec.get("images", [None])[0] if rec.get("images") else None,
-                                "slider": rec.get("images", []),
-                                "brandId": rec.get("brand", {}).get("id"),
-                                "brandName": rec.get("brand", {}).get("name"),
-                                "categoryId": rec.get("category", {}).get("id"),
-                                "categoryName": rec.get("category", {}).get("name"),
-                                "movementTypeName": ", ".join(rec.get("movement_type_tags", [])),
+                                "thumbnail": thumbnail,
+                                "slider": slider_list,
+                                "brandId": (rec.get("brand", {}) or {}).get("id"),
+                                "brandName": (rec.get("brand", {}) or {}).get("name"),
+                                "categoryId": (rec.get("category", {}) or {}).get("id"),
+                                "categoryName": (rec.get("category", {}) or {}).get("name"),
+                                "movementTypeName": movement_type_name,
                                 "colorTags": rec.get("color_tags", []),
                                 "styleTags": rec.get("style_tags", []),
                                 "isAiRecommended": rec.get("is_ai_recommended"),
@@ -1381,24 +1434,41 @@ class ActionFilterProducts(Action):
                     recs = rec_data.get("data", {}).get("data", {}).get("recommendations", [])
                     cards: List[Dict[str, Any]] = []
                     for rec in recs:
+                        gender_val = rec.get("gender") or rec.get("gender_target")
+                        if gender_val in ("M", "F"):
+                            gender_val = "0" if gender_val == "M" else "1"
+                        slider_raw = rec.get("slider")
+                        if isinstance(slider_raw, str):
+                            slider_list = [s.strip() for s in slider_raw.split(",") if s.strip()]
+                        elif isinstance(slider_raw, list):
+                            slider_list = slider_raw
+                        else:
+                            slider_list = rec.get("images", [])
+                        thumbnail = rec.get("thumbnail") or (rec.get("images", [None])[0] if rec.get("images") else None)
+                        movement_type_name = (rec.get("movement_type") or {}).get("name") or ", ".join(rec.get("movement_type_tags", []))
+                        case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
                         cards.append({
                             "id": rec.get("watch_id"),
                             "code": f"REC-{rec.get('watch_id')}",
                             "name": rec.get("name"),
                             "description": rec.get("description"),
-                            "model": rec.get("name"),
-                            "caseMaterial": ", ".join(rec.get("material_tags", [])),
-                            "gender": rec.get("gender_target"),
+                            "model": rec.get("model") or rec.get("name"),
+                            "caseMaterial": case_material,
+                            "caseSize": rec.get("case_size"),
+                            "strapSize": rec.get("strap_size"),
+                            "gender": gender_val,
+                            "waterResistance": rec.get("water_resistance"),
+                            "releaseDate": rec.get("release_date"),
                             "sold": rec.get("sold"),
                             "basePrice": rec.get("base_price"),
                             "rating": rec.get("rating"),
-                            "thumbnail": rec.get("images", [None])[0] if rec.get("images") else None,
-                            "slider": rec.get("images", []),
-                            "brandId": rec.get("brand", {}).get("id"),
-                            "brandName": rec.get("brand", {}).get("name"),
-                            "categoryId": rec.get("category", {}).get("id"),
-                            "categoryName": rec.get("category", {}).get("name"),
-                            "movementTypeName": ", ".join(rec.get("movement_type_tags", [])),
+                            "thumbnail": thumbnail,
+                            "slider": slider_list,
+                            "brandId": (rec.get("brand", {}) or {}).get("id"),
+                            "brandName": (rec.get("brand", {}) or {}).get("name"),
+                            "categoryId": (rec.get("category", {}) or {}).get("id"),
+                            "categoryName": (rec.get("category", {}) or {}).get("name"),
+                            "movementTypeName": movement_type_name,
                             "colorTags": rec.get("color_tags", []),
                             "styleTags": rec.get("style_tags", []),
                             "isAiRecommended": rec.get("is_ai_recommended"),
