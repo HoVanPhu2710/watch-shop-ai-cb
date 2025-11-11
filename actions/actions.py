@@ -332,7 +332,7 @@ class ActionShowPopularWatches(Action):
 
                 cards.append({
                     "id": rec.get("watch_id"),
-                    "code": f"REC-{rec.get('watch_id')}",
+                    "code": rec.get("code") or f"REC-{rec.get('watch_id')}",
                     "name": rec.get("name"),
                     "description": rec.get("description"),
                     "model": rec.get("model") or rec.get("name"),
@@ -1037,7 +1037,7 @@ class ActionSearchProducts(Action):
                         case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
                         cards.append({
                             "id": rec.get("watch_id"),
-                            "code": f"REC-{rec.get('watch_id')}",
+                            "code": rec.get("code") or f"REC-{rec.get('watch_id')}",
                             "name": rec.get("name"),
                             "description": rec.get("description"),
                             "model": rec.get("model") or rec.get("name"),
@@ -1153,7 +1153,7 @@ class ActionSearchProducts(Action):
                             case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
                             cards.append({
                                 "id": rec.get("watch_id"),
-                                "code": f"REC-{rec.get('watch_id')}",
+                                "code": rec.get("code") or f"REC-{rec.get('watch_id')}",
                                 "name": rec.get("name"),
                                 "description": rec.get("description"),
                                 "model": rec.get("model") or rec.get("name"),
@@ -1449,7 +1449,7 @@ class ActionFilterProducts(Action):
                         case_material = rec.get("case_material") or ", ".join(rec.get("material_tags", []))
                         cards.append({
                             "id": rec.get("watch_id"),
-                            "code": f"REC-{rec.get('watch_id')}",
+                            "code": rec.get("code") or f"REC-{rec.get('watch_id')}",
                             "name": rec.get("name"),
                             "description": rec.get("description"),
                             "model": rec.get("model") or rec.get("name"),
