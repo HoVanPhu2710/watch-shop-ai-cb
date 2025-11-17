@@ -4,7 +4,7 @@
 # See this guide on how to implement these action:
 # https://rasa.com/docs/rasa/custom-actions
 
-from typing import Any, Text, Dict, List
+from typing import Any, Text, Dict, List, Optional
 import requests
 import json
 import os
@@ -14,6 +14,22 @@ from rasa_sdk.executor import CollectingDispatcher
 
 # Get API URL from environment variable, default to backend API for production
 API_BASE_URL = os.getenv("API_URL", "https://watch-shop-uzr4.onrender.com")
+
+
+def format_price_value(value: Optional[int]) -> Text:
+    """Format a price in VND into a concise human-readable string."""
+    if value is None:
+        return ""
+
+    def format_number(num: float) -> Text:
+        return str(int(num)) if num.is_integer() else f"{num:.1f}".rstrip("0").rstrip(".")
+
+    if value >= 1_000_000:
+        millions = value / 1_000_000
+        return f"{format_number(millions)} triệu"
+
+    thousands = value / 1000
+    return f"{format_number(thousands)}k"
 
 
 class ActionShowBrands(Action):
@@ -1286,12 +1302,12 @@ class ActionSearchProducts(Action):
                 if price_range:
                     min_price, max_price = price_range
                     if max_price is not None:
-                        if min_price == 0:
-                            desc_parts.append(f"dưới {max_price//1000}k" if max_price < 1000000 else f"dưới {max_price//1000000} triệu")
+                        if not min_price or min_price == 0:
+                            desc_parts.append(f"dưới {format_price_value(max_price)}")
                         else:
-                            desc_parts.append(f"giá từ {min_price//1000}k đến {max_price//1000}k" if max_price < 1000000 else f"giá từ {min_price//1000000} triệu đến {max_price//1000000} triệu")
-                    else:
-                        desc_parts.append(f"trên {min_price//1000000} triệu")
+                            desc_parts.append(f"giá từ {format_price_value(min_price)} đến {format_price_value(max_price)}")
+                    elif min_price is not None:
+                        desc_parts.append(f"trên {format_price_value(min_price)}")
                 filter_text = ", ".join([p for p in desc_parts if p]) or "bộ lọc"
 
                 dispatcher.utter_message(
@@ -1648,12 +1664,12 @@ class ActionFilterProducts(Action):
                         min_price = int(min_price_str)
                         max_price = int(max_price_str) if max_price_str else None
                         if max_price is not None:
-                            if min_price == 0:
-                                filter_desc.append(f"dưới {max_price//1000}k" if max_price < 1000000 else f"dưới {max_price//1000000} triệu")
+                            if not min_price or min_price == 0:
+                                filter_desc.append(f"dưới {format_price_value(max_price)}")
                             else:
-                                filter_desc.append(f"giá từ {min_price//1000}k đến {max_price//1000}k" if max_price < 1000000 else f"giá từ {min_price//1000000} triệu đến {max_price//1000000} triệu")
-                        else:
-                            filter_desc.append(f"trên {min_price//1000000} triệu")
+                                filter_desc.append(f"giá từ {format_price_value(min_price)} đến {format_price_value(max_price)}")
+                        elif min_price is not None:
+                            filter_desc.append(f"trên {format_price_value(min_price)}")
                 except:
                     filter_desc.append(f"giá {base_price_range}")
 
