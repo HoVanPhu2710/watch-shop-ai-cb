@@ -751,40 +751,85 @@ class ActionSearchProducts(Action):
                 # Skip price parsing ONLY if text contains rating-related keywords WITHOUT price keywords
                 # This allows parsing price even when rating is present, as long as price keywords exist
                 text_lower = text.lower()
-                has_price_keywords = any(kw in text_lower for kw in ["giá", "triệu", "nghìn", "k ", "mua", "còn có"])
+                has_price_keywords = any(kw in text_lower for kw in ["giá", "triệu", "nghìn", "ngàn", "k ", "mua", "còn có", "m"])
                 has_rating_keywords = any(kw in text_lower for kw in ["sao", "rating", "đánh giá"])
                 
                 # Only skip if rating keywords exist but NO price keywords (to avoid false matches)
                 if has_rating_keywords and not has_price_keywords:
                     return None
                 
-                # Remove common words and normalize
-                text = text_lower.replace(".", "").replace(",", "")
+                # Normalize formatting: remove thousand separators but keep decimals, handle decimal commas
+                thousand_sep_regex = re.compile(r"(?<=\d)[\.,](?=\d{3}(?:\D|$))")
+                decimal_comma_regex = re.compile(r"(?<=\d),(?=\d)")
+                
+                text = thousand_sep_regex.sub("", text_lower)
+                text = decimal_comma_regex.sub(".", text)
+                
+                # Expand compact million notations (e.g., 2m4 -> 2.4 triệu, 1tr2 -> 1.2 triệu)
+                text = re.sub(r"(\d+)\s*m\s*(\d+)", r"\1.\2 triệu", text, flags=re.IGNORECASE)
+                text = re.sub(r"(\d+)\s*m\b", r"\1 triệu", text, flags=re.IGNORECASE)
+                text = re.sub(r"(\d+)\s*tr\s*(\d+)", r"\1.\2 triệu", text, flags=re.IGNORECASE)
+                text = re.sub(r"(\d+)\s*tr\b", r"\1 triệu", text, flags=re.IGNORECASE)
+                text = re.sub(r"(\d+)\s+triệu\s+(\d+)(?!\s*(?:nghìn|ngàn|k))", r"\1.\2 triệu", text)
+                
+                number_token = r"\d+(?:[\.,]\d+)?(?:\s*(?:m|tr|triệu|k|nghìn|ngàn))?(?:\s+\d+\s*(?:nghìn|ngàn|k))?"
                 
                 # Helper to convert text to number
                 def text_to_number(s):
                     s = s.strip().lower()
+                    if not s:
+                        return None
+                    s = thousand_sep_regex.sub("", s)
+                    s = decimal_comma_regex.sub(".", s)
+                    s = s.replace("ngàn", "nghìn")
+                    s = re.sub(r"\s+", " ", s).strip()
+                    
+                    # Remove currency words for easier parsing
+                    for currency_word in ["vnd", "vnđ", "đồng", "đ"]:
+                        if s.endswith(currency_word):
+                            s = s[: -len(currency_word)].strip()
+                    
+                    # Patterns for million-based expressions
+                    match = re.fullmatch(r"(\d+)\s*(?:triệu|tr)\s+(\d+)\s*(?:nghìn|k)", s)
+                    if match:
+                        return int(match.group(1)) * 1000000 + int(match.group(2)) * 1000
+                    
+                    match = re.fullmatch(r"(\d+)\s*(?:triệu|tr)\s+(\d+)", s)
+                    if match:
+                        combined = float(f"{match.group(1)}.{match.group(2)}")
+                        return int(combined * 1000000)
+                    
+                    match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(?:triệu|tr|m)", s)
+                    if match:
+                        return int(float(match.group(1)) * 1000000)
+                    
+                    # Thousand-based expressions
+                    match = re.fullmatch(r"(\d+(?:\.\d+)?)\s*(?:k|nghìn)", s)
+                    if match:
+                        return int(float(match.group(1)) * 1000)
+                    
+                    # Plain number with optional decimal
+                    try:
+                        val = float(s)
+                        if val < 10000:
+                            return int(val * 1000)
+                        return int(val)
+                    except:
+                        pass
+                    
                     # Handle "k" suffix (thousand)
                     if s.endswith("k"):
                         return int(float(s[:-1]) * 1000)
-                    # Handle "tr" or "triệu" (million)
-                    if s.endswith("tr") or s.endswith("triệu"):
-                        num_part = s.replace("tr", "").replace("triệu", "").strip()
-                        if num_part:
-                            return int(float(num_part) * 1000000)
-                    # Handle "nghìn" (thousand)
+                    # Handle "nghìn" fallback (if still present)
                     if "nghìn" in s:
                         num_part = s.replace("nghìn", "").strip()
                         if num_part:
                             return int(float(num_part) * 1000)
-                    # Try to parse as number
-                    try:
-                        return int(float(s))
-                    except:
-                        return None
+                    
+                    return None
                 
                 # Pattern 1: "từ X đến Y" or "khoảng từ X đến Y" or "trong khoảng từ X đến Y"
-                range_pattern = r"(?:từ|khoảng từ|trong khoảng từ)\s+([\d\.\,\s]+(?:k|tr|triệu|nghìn)?)\s+đến\s+([\d\.\,\s]+(?:k|tr|triệu|nghìn)?)"
+                range_pattern = rf"(?:từ|khoảng từ|trong khoảng từ)\s+({number_token})\s+đến\s+({number_token})"
                 match = re.search(range_pattern, text)
                 if match:
                     min_val = text_to_number(match.group(1))
@@ -792,8 +837,17 @@ class ActionSearchProducts(Action):
                     if min_val is not None and max_val is not None:
                         return (min_val, max_val)
                 
+                # Pattern 1b: "X đến Y" or "X - Y"
+                range_pattern_simple = rf"({number_token})\s+(?:đến|-)\s+({number_token})"
+                match = re.search(range_pattern_simple, text)
+                if match:
+                    min_val = text_to_number(match.group(1))
+                    max_val = text_to_number(match.group(2))
+                    if min_val is not None and max_val is not None:
+                        return (min_val, max_val)
+                
                 # Pattern 2: "dưới X" or "dưới X triệu" or "dưới Xk"
-                below_pattern = r"dưới\s+([\d\.\,\s]+(?:k|tr|triệu|nghìn)?)"
+                below_pattern = rf"dưới\s+({number_token})"
                 match = re.search(below_pattern, text)
                 if match:
                     max_val = text_to_number(match.group(1))
@@ -801,7 +855,7 @@ class ActionSearchProducts(Action):
                         return (0, max_val)
                 
                 # Pattern 3: "trên X" or "từ X trở lên"
-                above_pattern = r"(?:trên|từ)\s+([\d\.\,\s]+(?:k|tr|triệu|nghìn)?)(?:\s+trở lên)?"
+                above_pattern = rf"(?:trên|từ)\s+({number_token})(?:\s+trở lên)?"
                 match = re.search(above_pattern, text)
                 if match:
                     min_val = text_to_number(match.group(1))
@@ -809,7 +863,7 @@ class ActionSearchProducts(Action):
                         return (min_val, None)  # No upper limit
                 
                 # Pattern 4: "tầm X" or "khoảng X" or "cỡ X" or "còn có X"
-                exact_pattern = r"(?:tầm|khoảng|cỡ|còn có)\s+([\d\.\,\s]+(?:k|tr|triệu|nghìn)?)"
+                exact_pattern = rf"(?:tầm|khoảng|cỡ|còn có)\s+({number_token})"
                 match = re.search(exact_pattern, text)
                 if match:
                     val = text_to_number(match.group(1))
@@ -818,7 +872,7 @@ class ActionSearchProducts(Action):
                         return (int(val * 0.9), int(val * 1.1))
                 
                 # Pattern 5: Just a number with k/tr/triệu/nghìn (e.g., "250k", "1 triệu")
-                simple_pattern = r"([\d\.\,\s]+(?:k|tr|triệu|nghìn))"
+                simple_pattern = r"([\d\.\,\s]+(?:k|tr|triệu|nghìn|m))"
                 matches = re.findall(simple_pattern, text)
                 if matches:
                     # Try to find price context
