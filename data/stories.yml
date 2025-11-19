@@ -124,14 +124,14 @@ stories:
   - story: check order status
     steps:
       - intent: ask_order_status
-      - action: utter_show_order_status
+      - action: action_show_order_status
       - intent: ask_inventory
       - action: utter_show_inventory
 
   - story: customer wants to cancel order
     steps:
       - intent: ask_order_status
-      - action: utter_show_order_status
+      - action: action_show_order_status
       - intent: cancel_order
       - action: utter_confirm_cancellation
 
