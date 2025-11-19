@@ -56,6 +56,11 @@ rules:
       - intent: ask_popular_watches
       - action: action_show_popular_watches
 
+  - rule: Show order status when user asks
+    steps:
+      - intent: ask_order_status
+      - action: action_show_order_status
+
   - rule: Search watches when user wants to search
     steps:
       - intent: search_watches
