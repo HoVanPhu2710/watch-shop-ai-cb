@@ -637,7 +637,7 @@ class ActionShowStrapMaterials(Action):
             # Handle encoding issues
             response.encoding = 'utf-8'
             data = response.json()
-            strap_materials = data.get("strapMaterials", {}).get("rows", [])
+            strap_materials = data.get("strapMaterials", {}).get("items", [])
             
             if not strap_materials:
                 dispatcher.utter_message(text="Hiện tại chưa có chất liệu dây đeo nào.")
@@ -722,7 +722,9 @@ class ActionSearchProducts(Action):
                 if isinstance(data_cursor, list):
                     return data_cursor
                 if isinstance(data_cursor, dict):
-                    # support {rows: [...]}
+                    # support {items: [...]} or {rows: [...]} for backward compatibility
+                    if "items" in data_cursor and isinstance(data_cursor.get("items"), list):
+                        return data_cursor.get("items", [])
                     if "rows" in data_cursor and isinstance(data_cursor.get("rows"), list):
                         return data_cursor.get("rows", [])
                 return []
@@ -1622,7 +1624,7 @@ class ActionFilterProducts(Action):
                         sm_resp = requests.get(f"{API_BASE_URL}/v1/strap-materials", headers=sm_headers, timeout=10)
                         sm_resp.raise_for_status()
                         sm_data = sm_resp.json()
-                        sm_items = sm_data.get("strapMaterials", {}).get("rows", [])
+                        sm_items = sm_data.get("strapMaterials", {}).get("items", [])
                         for m in sm_items:
                             if str(m.get("id")) == str(strap_material_id):
                                 material_name_resolved = m.get("name")
@@ -1770,21 +1772,33 @@ class ActionShowOrderStatus(Action):
             status_data = status_response.json()
             
             orders = orders_data.get("orders", {}).get("items", [])
-            order_statuses = status_data.get("orderStatuses", {}).get("rows", [])
+            order_statuses = status_data.get("orderStatuses", {}).get("items", [])
             
             if not orders:
                 dispatcher.utter_message(text="Bạn chưa có đơn hàng nào.")
                 return []
 
-            # Create status mapping for easy lookup
+            # Create status mapping for easy lookup (support both string and int keys)
             status_map = {}
             for status in order_statuses:
-                status_map[status.get("id")] = {
+                status_id = status.get("id")
+                # Store with string key since current_status_id from orders is string
+                status_map[str(status_id)] = {
                     "name": status.get("name"),
                     "description": status.get("description"),
                     "color": status.get("color"),
                     "hex_code": status.get("hex_code")
                 }
+
+            # Map hex codes to color names for currentStatus objects
+            hex_to_color = {
+                "#008000": "Green",
+                "#00FF00": "Green",
+                "#F44336": "Red",
+                "#2196F3": "Blue",
+                "#FD7E14": "Orange",
+                "#FFC107": "Yellow"
+            }
 
             # Create order cards with buttons
             order_cards = []
@@ -1796,11 +1810,20 @@ class ActionShowOrderStatus(Action):
                 current_status_id = order.get("current_status_id")
                 created_at = order.get("created_at")
                 guess_name = order.get("guess_name", "")
+                current_status = order.get("currentStatus", {})
                 
-                # Get status info
-                status_info = status_map.get(current_status_id, {})
-                status_name = status_info.get("name", "Không xác định")
-                status_color = status_info.get("color", "Gray")
+                # Get status info - prioritize currentStatus from order, then fallback to status_map
+                if current_status and current_status.get("name"):
+                    status_name = current_status.get("name", "Không xác định")
+                    # Get color from hex_code mapping
+                    hex_code = current_status.get("hex_code", "").upper()
+                    status_color = hex_to_color.get(hex_code, "Gray")
+                else:
+                    # Fallback to status_map lookup
+                    status_id_key = str(current_status_id) if current_status_id else None
+                    status_info = status_map.get(status_id_key, {}) if status_id_key else {}
+                    status_name = status_info.get("name", "Không xác định")
+                    status_color = status_info.get("color", "Gray")
                 
                 # Format amount
                 formatted_amount = f"{final_amount:,}".replace(",", ".") + " VNĐ"
@@ -1887,7 +1910,7 @@ class ActionShowOrderStatuses(Action):
             response.raise_for_status()
             
             data = response.json()
-            order_statuses = data.get("orderStatuses", {}).get("rows", [])
+            order_statuses = data.get("orderStatuses", {}).get("items", [])
             
             if not order_statuses:
                 dispatcher.utter_message(text="Hiện tại chưa có trạng thái đơn hàng nào.")
