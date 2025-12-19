@@ -197,6 +197,16 @@ nlu:
       - giá có bảo hành không
       - sản phẩm giá bao nhiêu
       - giá có phụ kiện kèm theo không
+      - đồng hồ này giá bao nhiêu
+      - đồng hồ giá bao nhiêu
+      - giá đồng hồ
+      - giá đồng hồ này
+      - đồng hồ này bao nhiêu tiền
+      - đồng hồ bao nhiêu tiền
+      - giá cả đồng hồ
+      - giá đồng hồ có rẻ không
+      - đồng hồ có giá tốt không
+      - giá đồng hồ có hợp lý không
 
   - intent: ask_category
     examples: |
@@ -479,6 +489,48 @@ nlu:
       - sản phẩm có đẹp không
       - sản phẩm này có sang không
       - sản phẩm có sang không
+      - đồng hồ này có chống nước không
+      - đồng hồ có chống nước không
+      - đồng hồ này có chống nước bao nhiêu mét
+      - đồng hồ có chống nước bao nhiêu mét
+      - đồng hồ này có chống nước IP68 không
+      - đồng hồ có chống nước IP68 không
+      - đồng hồ này kích thước bao nhiêu
+      - đồng hồ kích thước bao nhiêu
+      - đồng hồ này size bao nhiêu
+      - đồng hồ size bao nhiêu
+      - đồng hồ này có dây gì
+      - đồng hồ có dây gì
+      - đồng hồ này dây da hay dây kim loại
+      - đồng hồ dây da hay dây kim loại
+      - đồng hồ này máy gì
+      - đồng hồ máy gì
+      - đồng hồ này máy pin hay máy cơ
+      - đồng hồ máy pin hay máy cơ
+      - đồng hồ này có bảo hành không
+      - đồng hồ có bảo hành không
+      - đồng hồ này bảo hành bao lâu
+      - đồng hồ bảo hành bao lâu
+      - đồng hồ này có đẹp không
+      - đồng hồ có đẹp không
+      - đồng hồ này có tốt không
+      - đồng hồ có tốt không
+      - đồng hồ này có bền không
+      - đồng hồ có bền không
+      - đồng hồ này có chính hãng không
+      - đồng hồ có chính hãng không
+      - đồng hồ này có giấy tờ không
+      - đồng hồ có giấy tờ không
+      - đồng hồ này có hộp không
+      - đồng hồ có hộp không
+      - đồng hồ này có pin không
+      - đồng hồ có pin không
+      - đồng hồ này pin dùng được bao lâu
+      - đồng hồ pin dùng được bao lâu
+      - đồng hồ này có đèn không
+      - đồng hồ có đèn không
+      - đồng hồ này có kim phát sáng không
+      - đồng hồ có kim phát sáng không
 
   - intent: ask_inventory
     examples: |
@@ -716,6 +768,15 @@ nlu:
       - đồng hồ bán chạy
       - tôi muốn mua các mẫu đồng hồ bán chạy
       - tôi muốn xem các mẫu đồng hồ bán chạy
+      - đồng hồ nào bán chạy
+      - đồng hồ nào bán chạy nhất
+      - các đồng hồ nào bán chạy
+      - sản phẩm nào bán chạy
+      - sản phẩm bán chạy
+      - đồng hồ có lượt mua nhiều
+      - sản phẩm có lượt mua cao
+      - sản phẩm có lượt mua nhiều
+      - đồng hồ lượt mua nhiều
       - đồng hồ hot
       - đồng hồ nổi bật
       - đồng hồ được yêu thích
@@ -733,6 +794,17 @@ nlu:
       - đồng hồ được xem nhiều
       - đồng hồ được like nhiều
       - đồng hồ được share nhiều
+      - cho tôi xem đồng hồ bán chạy
+      - hiển thị đồng hồ bán chạy
+      - show đồng hồ bán chạy
+      - xem đồng hồ bán chạy
+      - mẫu đồng hồ bán chạy
+      - top đồng hồ bán chạy
+      - mẫu nào bán chạy
+      - mẫu nào bán chạy nhất
+      - mẫu đồng hồ nào bán chạy
+      - mẫu nào hot
+      - mẫu nào nổi bật
 
   - intent: search_watches
     examples: |
@@ -742,6 +814,35 @@ nlu:
       - tôi muốn xem đồng hồ masala
       - tôi muốn mua đồng hồ nam
       - tôi muốn xem đồng hồ nữ
+      - tôi muốn mua đồng hồ nữ
+      - đồng hồ nào phù hợp con gái
+      - đồng hồ nào phù hợp con trai
+      - đồng hồ nào phù hợp với con gái
+      - đồng hồ nào phù hợp với con trai
+      - đồng hồ nào phù hợp cho con gái
+      - đồng hồ nào phù hợp cho con trai
+      - đồng hồ nào dành cho con gái
+      - đồng hồ nào dành cho con trai
+      - đồng hồ nào hợp với con gái
+      - đồng hồ nào hợp với con trai
+      - đồng hồ nào cho con gái
+      - đồng hồ nào cho con trai
+      - đồng hồ nào dành cho nữ
+      - đồng hồ nào dành cho nam
+      - đồng hồ nào cho nữ
+      - đồng hồ nào cho nam
+      - đồng hồ nào hợp với nữ
+      - đồng hồ nào hợp với nam
+      - đồng hồ nào phù hợp nữ
+      - đồng hồ nào phù hợp nam
+      - tư vấn đồng hồ cho con gái
+      - tư vấn đồng hồ cho con trai
+      - tư vấn đồng hồ nữ
+      - tư vấn đồng hồ nam
+      - gợi ý đồng hồ cho con gái
+      - gợi ý đồng hồ cho con trai
+      - gợi ý đồng hồ nữ
+      - gợi ý đồng hồ nam
       - tôi muốn tìm đồng hồ học sinh
       - tôi muốn xem đồng hồ sinh viên
       - tôi muốn mua đồng hồ phú
